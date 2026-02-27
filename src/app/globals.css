@@ -1,26 +1,235 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --primary: 160 84% 39%;
+  --primary-foreground: 0 0% 100%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --border: 214.3 31.8% 91.4%;
+  --ring: 160 84% 39%;
+  --available: 160 84% 39%;
+  --blocked: 0 84.2% 60.2%;
+  --radius: 0.75rem;
+
+  /* Accent colors */
+  --accent-purple: 271 75% 50%;
+  --accent-pink: 330 70% 60%;
+  --accent-teal: 162 63% 46%;
+
+  /* Glassmorphism tokens */
+  --glass-bg: 0 0% 100% / 0.7;
+  --glass-border: 0 0% 0% / 0.08;
+  --glass-blur: 16px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+.dark {
+  --background: 224 71% 4%;
+  --foreground: 213 31% 91%;
+  --card: 224 71% 6%;
+  --card-foreground: 213 31% 91%;
+  --primary: 160 84% 39%;
+  --primary-foreground: 0 0% 100%;
+  --muted: 223 47% 11%;
+  --muted-foreground: 215.4 16.3% 56.9%;
+  --border: 216 34% 17%;
+  --ring: 160 84% 39%;
+  --available: 160 84% 39%;
+  --blocked: 0 84.2% 60.2%;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Glassmorphism tokens (dark) */
+  --glass-bg: 224 71% 6% / 0.6;
+  --glass-border: 0 0% 100% / 0.08;
+  --glass-blur: 16px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+           env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
+
+/* ─── Glassmorphism utility ─── */
+.glass {
+  background: hsl(var(--glass-bg));
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid hsl(var(--glass-border));
+}
+
+/* ─── Mesh gradient background ─── */
+.mesh-gradient {
+  position: relative;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 40%, hsla(160, 84%, 39%, 0.12), transparent 60%),
+    radial-gradient(ellipse 60% 60% at 80% 20%, hsla(271, 75%, 50%, 0.08), transparent 55%),
+    radial-gradient(ellipse 50% 70% at 50% 80%, hsla(330, 70%, 60%, 0.06), transparent 50%),
+    hsl(var(--background));
+}
+
+/* ─── Grid overlay ─── */
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(hsl(var(--border) / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--border) / 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 70% 50% at 50% 40%, black 20%, transparent 70%);
+}
+
+/* ─── Gradient text ─── */
+.text-gradient-primary {
+  background: linear-gradient(135deg, hsl(160, 84%, 55%), hsl(162, 63%, 46%), hsl(271, 75%, 60%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Mouse-following glow (requires --mouse-x / --mouse-y set via JS) ─── */
+.mouse-glow {
+  position: relative;
+  overflow: hidden;
+}
+.mouse-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    hsla(160, 84%, 39%, 0.07),
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.mouse-glow:hover::before {
+  opacity: 1;
+}
+
+/* ─── CTA shine sweep ─── */
+@keyframes shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(250%); }
+}
+
+.cta-shine {
+  position: relative;
+  overflow: hidden;
+}
+.cta-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsla(0, 0%, 100%, 0.15),
+    transparent
+  );
+  pointer-events: none;
+  animation: shine 3s ease-in-out infinite;
+}
+
+/* ─── Floating orb keyframe ─── */
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+  25% { transform: translateY(-20px) translateX(10px) scale(1.02); }
+  50% { transform: translateY(-10px) translateX(-10px) scale(0.98); }
+  75% { transform: translateY(-25px) translateX(5px) scale(1.01); }
+}
+
+/* ─── Gradient text animation ─── */
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ─── Accessibility: Focus visible ─── */
+*:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* ─── Subtle card surface (glass, no border) ─── */
+.card-surface {
+  background: hsl(var(--glass-bg));
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow:
+    0 0 0 1px hsl(var(--glass-border)),
+    0 4px 24px -4px rgba(0, 0, 0, 0.3);
+}
+
+/* ─── Gradient border (pseudo-element) ─── */
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    hsla(160, 84%, 39%, 0.2),
+    transparent 50%,
+    hsla(271, 75%, 50%, 0.1)
+  );
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+}
+
+/* ─── Section divider (gradient line) ─── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(var(--border) / 0.5),
+    transparent
+  );
+}
+
+/* ─── Accessibility: Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
 }
