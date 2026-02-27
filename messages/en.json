@@ -144,7 +144,19 @@
     "overview": "Overview",
     "services": "Services",
     "professionals": "Professionals",
-    "settings": "Settings"
+    "settings": "Settings",
+    "agenda": "Agenda",
+    "assignServices": "Assign services",
+    "quickBook": "Book appointment",
+    "revenue": "Revenue",
+    "todayRevenue": "Today's revenue",
+    "weekRevenue": "This week's revenue",
+    "upcomingAppointments": "Upcoming appointments",
+    "recentActivity": "Recent activity",
+    "noUpcoming": "No upcoming appointments",
+    "viewAgenda": "View agenda",
+    "welcomeBack": "Welcome back",
+    "hereIsYourDay": "Here's how your day looks"
   },
   "services": {
     "title": "Services",
@@ -160,7 +172,13 @@
     "active": "Active",
     "inactive": "Inactive",
     "noServices": "You haven't added any services yet",
-    "deleteConfirm": "Delete this service?"
+    "deleteConfirm": "Delete this service?",
+    "assignToProf": "Assign to professionals",
+    "selectProfessional": "Select a professional",
+    "assignedServices": "Assigned services",
+    "assignDesc": "Specify which services each professional offers",
+    "saveAssignments": "Save assignments",
+    "assignmentsSaved": "Assignments saved"
   },
   "professionals": {
     "title": "Professionals",
@@ -192,6 +210,8 @@
     "quickBook": "Quick book",
     "dragToBlock": "Drag to block",
     "reason": "Reason (optional)",
+    "noAppointments": "No appointments for this day",
+    "allProfessionals": "All professionals",
     "days": {
       "monday": "Monday",
       "tuesday": "Tuesday",
@@ -232,6 +252,26 @@
     "stepMinutes": "Time slot interval (min)",
     "bufferMinutes": "Buffer between appointments (min)",
     "leadTimeMinutes": "Minimum lead time (min)"
+  },
+  "searchFilter": {
+    "title": "Search availability",
+    "searchByBusiness": "Search by business",
+    "searchByService": "Search by service",
+    "searchByDate": "Search by date",
+    "businessPlaceholder": "Business name...",
+    "servicePlaceholder": "Service type...",
+    "dateRange": "Date range",
+    "from": "From",
+    "to": "To",
+    "applyFilters": "Apply filters",
+    "clearAll": "Clear all",
+    "allServices": "All services",
+    "allBusinesses": "All businesses",
+    "resultsCount": "{count} results found",
+    "noFiltersApplied": "Apply filters to search",
+    "filterByCategory": "Filter by category",
+    "priceRange": "Price range",
+    "availability": "Availability"
   },
   "discover": {
     "title": "Discover your next appointment",

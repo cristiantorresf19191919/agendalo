@@ -144,7 +144,19 @@
     "overview": "Resumen",
     "services": "Servicios",
     "professionals": "Profesionales",
-    "settings": "Configuración"
+    "settings": "Configuración",
+    "agenda": "Agenda",
+    "assignServices": "Asignar servicios",
+    "quickBook": "Agendar cita",
+    "revenue": "Ingresos",
+    "todayRevenue": "Ingresos de hoy",
+    "weekRevenue": "Ingresos de la semana",
+    "upcomingAppointments": "Próximas citas",
+    "recentActivity": "Actividad reciente",
+    "noUpcoming": "Sin citas próximas",
+    "viewAgenda": "Ver agenda",
+    "welcomeBack": "Bienvenido de vuelta",
+    "hereIsYourDay": "Así se ve tu día de hoy"
   },
   "services": {
     "title": "Servicios",
@@ -160,7 +172,13 @@
     "active": "Activo",
     "inactive": "Inactivo",
     "noServices": "Aún no has agregado servicios",
-    "deleteConfirm": "¿Eliminar este servicio?"
+    "deleteConfirm": "¿Eliminar este servicio?",
+    "assignToProf": "Asignar a profesionales",
+    "selectProfessional": "Selecciona un profesional",
+    "assignedServices": "Servicios asignados",
+    "assignDesc": "Especifica los servicios que ofrece cada profesional",
+    "saveAssignments": "Guardar asignaciones",
+    "assignmentsSaved": "Asignaciones guardadas"
   },
   "professionals": {
     "title": "Profesionales",
@@ -192,6 +210,8 @@
     "quickBook": "Reserva rápida",
     "dragToBlock": "Arrastra para bloquear",
     "reason": "Motivo (opcional)",
+    "noAppointments": "Sin citas para este día",
+    "allProfessionals": "Todos los profesionales",
     "days": {
       "monday": "Lunes",
       "tuesday": "Martes",
@@ -232,6 +252,26 @@
     "stepMinutes": "Intervalo de horarios (min)",
     "bufferMinutes": "Tiempo entre citas (min)",
     "leadTimeMinutes": "Anticipación mínima (min)"
+  },
+  "searchFilter": {
+    "title": "Buscar disponibilidad",
+    "searchByBusiness": "Buscar por negocio",
+    "searchByService": "Buscar por servicio",
+    "searchByDate": "Buscar por fecha",
+    "businessPlaceholder": "Nombre del negocio...",
+    "servicePlaceholder": "Tipo de servicio...",
+    "dateRange": "Rango de fechas",
+    "from": "Desde",
+    "to": "Hasta",
+    "applyFilters": "Aplicar filtros",
+    "clearAll": "Limpiar todo",
+    "allServices": "Todos los servicios",
+    "allBusinesses": "Todos los negocios",
+    "resultsCount": "{count} resultados encontrados",
+    "noFiltersApplied": "Aplica filtros para buscar",
+    "filterByCategory": "Filtrar por categoría",
+    "priceRange": "Rango de precio",
+    "availability": "Disponibilidad"
   },
   "discover": {
     "title": "Descubre tu próxima cita",

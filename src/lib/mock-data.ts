@@ -160,7 +160,7 @@ const businesses: MockBusiness[] = [
     timezone: 'America/Bogota',
     description: 'Tu oasis de tranquilidad en Usaquén. Relájate, renuévate, renace.',
     coverImageUrl:
-      'https://images.unsplash.com/photo-1540555700478-4be289fbec6d?w=800&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=800&h=400&fit=crop',
     logoUrl: undefined,
     address: 'Cra. 6 #119-24, Usaquén, Bogotá',
     phone: '+57 320 123 4567',
@@ -172,7 +172,8 @@ const businesses: MockBusiness[] = [
     whatsapp: '+573201234567',
     galleryImages: [
       'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=400&fit=crop',
-      'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=600&h=400&fit=crop',
     ],
   }),
   makeBusiness({
@@ -437,6 +438,98 @@ export interface MockReview {
   rating: number;
   text: string;
   date: string;
+}
+
+/* ─── Mock service assignments (professional → services) ─── */
+
+export interface MockServiceAssignment {
+  professionalId: string;
+  serviceIds: string[];
+}
+
+export function getMockServiceAssignments(businessId: string): MockServiceAssignment[] {
+  const bizPros = professionals.filter((p) => p.businessId === businessId);
+  const bizSvcs = services.filter((s) => s.businessId === businessId);
+
+  return bizPros.map((pro, i) => ({
+    professionalId: pro.id,
+    serviceIds: bizSvcs.slice(0, Math.max(2, bizSvcs.length - i)).map((s) => s.id),
+  }));
+}
+
+/* ─── Mock appointments for agenda ─── */
+
+export interface MockAppointment {
+  id: string;
+  professionalId: string;
+  professionalName: string;
+  customerName: string;
+  serviceName: string;
+  startTime: string;
+  endTime: string;
+  status: 'confirmed' | 'completed' | 'cancelled' | 'blocked';
+  color: string;
+}
+
+export function getMockAppointments(businessId: string, date: string): MockAppointment[] {
+  const bizPros = professionals.filter((p) => p.businessId === businessId);
+  if (bizPros.length === 0) return [];
+
+  const seed = date.split('').reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+  const rand = (i: number) => ((seed * 31 + i * 17) % 100) / 100;
+
+  const customers = ['Alejandra Gómez', 'Santiago Ruiz', 'Catalina López', 'Andrés Martínez', 'Isabella Torres', 'Fernando Sánchez', 'Valentina Herrera', 'Diego Castillo'];
+  const statusColors: Record<string, string> = {
+    confirmed: 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300',
+    completed: 'bg-blue-500/20 border-blue-500/40 text-blue-300',
+    blocked: 'bg-amber-500/20 border-amber-500/40 text-amber-300',
+    cancelled: 'bg-red-500/20 border-red-500/40 text-red-300',
+  };
+  const bizSvcs = services.filter((s) => s.businessId === businessId);
+  const appts: MockAppointment[] = [];
+  let id = 0;
+
+  for (const pro of bizPros) {
+    const numAppts = 3 + Math.floor(rand(id) * 4);
+    const usedHours = new Set<number>();
+
+    for (let j = 0; j < numAppts; j++) {
+      let hour = 8 + Math.floor(rand(id + j + 1) * 10);
+      while (usedHours.has(hour) && hour < 19) hour++;
+      if (hour >= 19) continue;
+      usedHours.add(hour);
+
+      const svc = bizSvcs[Math.floor(rand(id + j + 2) * bizSvcs.length)] ?? bizSvcs[0];
+      const durHours = Math.ceil((svc?.durationMinutes ?? 30) / 60);
+      const endHour = Math.min(hour + durHours, 20);
+      const status = rand(id + j + 3) > 0.85 ? 'blocked' : rand(id + j + 4) > 0.7 ? 'completed' : 'confirmed';
+
+      appts.push({
+        id: `appt-${id++}`,
+        professionalId: pro.id,
+        professionalName: pro.name,
+        customerName: customers[Math.floor(rand(id + j + 5) * customers.length)],
+        serviceName: svc?.name ?? 'Servicio',
+        startTime: `${String(hour).padStart(2, '0')}:00`,
+        endTime: `${String(endHour).padStart(2, '0')}:00`,
+        status: status as MockAppointment['status'],
+        color: statusColors[status],
+      });
+    }
+  }
+
+  return appts.sort((a, b) => a.startTime.localeCompare(b.startTime));
+}
+
+/* ─── All services (cross-business) for global search ─── */
+
+export function getAllServices(): MockService[] {
+  return services;
+}
+
+export function getServiceCategories(): string[] {
+  const cats = new Set(services.map((s) => s.category).filter(Boolean));
+  return Array.from(cats) as string[];
 }
 
 export function getMockReviews(businessId: string): MockReview[] {

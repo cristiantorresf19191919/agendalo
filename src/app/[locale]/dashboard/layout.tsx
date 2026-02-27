@@ -12,18 +12,18 @@ export default async function DashboardLayout({ children, params }: DashboardLay
   const t = await getTranslations('dashboard');
 
   return (
-    <div className="flex h-screen">
+    <div className="flex min-h-screen">
       <Sidebar
         locale={locale}
         translations={{
           overview: t('overview'),
           services: t('services'),
           professionals: t('professionals'),
-          calendar: 'Calendar',
+          calendar: t('agenda'),
           settings: t('settings'),
         }}
       />
-      <main className="flex-1 overflow-auto p-6 lg:p-8 mesh-gradient">{children}</main>
+      <main className="flex-1 overflow-auto p-4 lg:p-8 mesh-gradient">{children}</main>
     </div>
   );
 }
