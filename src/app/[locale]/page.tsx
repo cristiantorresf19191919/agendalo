@@ -35,6 +35,8 @@ import { BusinessCardSkeleton } from '@/ui/components/common/skeleton';
 import { ScrollReveal } from '@/ui/components/common/scroll-reveal';
 import { FloatingOrbs } from '@/ui/components/common/floating-orbs';
 import { SearchFilterModal } from '@/ui/components/common/search-filter-modal';
+import { LiveActivityTicker } from '@/ui/components/common/live-activity-ticker';
+import { BarrioQuickSelect } from '@/ui/components/common/barrio-quick-select';
 import { staggerContainer } from '@/ui/animations/variants';
 import { getAllBusinesses, searchBusinesses, getBusinessesByCategory } from '@/lib/mock-data';
 import type { MockBusiness } from '@/lib/mock-data';
@@ -233,6 +235,16 @@ export default function HomePage() {
             </div>
             <span>{t('home.trustedBy')}</span>
           </motion.div>
+
+          {/* Live activity ticker */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7 }}
+            className="mt-6 w-full max-w-lg"
+          >
+            <LiveActivityTicker />
+          </motion.div>
         </div>
       </section>
 
@@ -270,6 +282,17 @@ export default function HomePage() {
             );
           })}
         </div>
+      </section>
+
+      {/* ── Barrio Quick Select ── */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-12">
+        <ScrollReveal>
+          <div className="text-center mb-8">
+            <h2 className="text-xl sm:text-2xl font-bold">{t('home.barrioSectionTitle')}</h2>
+            <p className="text-sm text-zinc-500 mt-1">{t('home.barrioSectionDesc')}</p>
+          </div>
+        </ScrollReveal>
+        <BarrioQuickSelect />
       </section>
 
       {/* ── Category filters + Business Grid ── */}
