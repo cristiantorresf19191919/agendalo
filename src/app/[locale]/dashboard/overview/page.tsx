@@ -13,6 +13,11 @@ import {
   Clock,
   ArrowRight,
   Plus,
+  Heart,
+  AlertTriangle,
+  Zap,
+  Star,
+  Activity,
 } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { PageTransition } from '@/ui/components/layout/page-transition';
@@ -121,6 +126,142 @@ export default function DashboardOverviewPage() {
           />
         </motion.div>
 
+        {/* Revenue + Health Score Row */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Revenue today */}
+          <motion.div
+            variants={cardEntrance}
+            initial="hidden"
+            animate="visible"
+            className="rounded-2xl p-5 bg-card/60 backdrop-blur-sm border border-white/[0.04]"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <DollarSign className="h-4 w-4 text-emerald-400" />
+              <h2 className="font-semibold">{t('todayRevenue')}</h2>
+            </div>
+            <p className="text-3xl font-bold text-gradient-primary">{formatCOP(845000)}</p>
+            <div className="flex items-center gap-1 mt-2 text-xs text-emerald-400">
+              <TrendingUp className="h-3 w-3" />
+              <span>+18% vs ayer</span>
+            </div>
+            <div className="mt-4 space-y-2">
+              {[
+                { label: 'Nequi', amount: 380000, pct: 45 },
+                { label: 'Efectivo', amount: 290000, pct: 34 },
+                { label: 'Daviplata', amount: 175000, pct: 21 },
+              ].map((pm) => (
+                <div key={pm.label} className="space-y-1">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-zinc-400">{pm.label}</span>
+                    <span className="text-zinc-300 font-medium">{formatCOP(pm.amount)}</span>
+                  </div>
+                  <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${pm.pct}%` }}
+                      transition={{ duration: 0.8, delay: 0.3 }}
+                      className="h-full rounded-full bg-emerald-500"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Health score */}
+          <motion.div
+            variants={cardEntrance}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.05 }}
+            className="rounded-2xl p-5 bg-card/60 backdrop-blur-sm border border-white/[0.04]"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <Activity className="h-4 w-4 text-emerald-400" />
+              <h2 className="font-semibold">Salud del negocio</h2>
+            </div>
+            <div className="flex items-center justify-center py-4">
+              <div className="relative h-28 w-28">
+                <svg viewBox="0 0 100 100" className="h-full w-full -rotate-90">
+                  <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" strokeWidth="8" className="text-zinc-800" />
+                  <motion.circle
+                    cx="50" cy="50" r="42" fill="none" strokeWidth="8" strokeLinecap="round"
+                    className="text-emerald-400"
+                    strokeDasharray={264}
+                    initial={{ strokeDashoffset: 264 }}
+                    animate={{ strokeDashoffset: 264 * (1 - 0.87) }}
+                    transition={{ duration: 1, delay: 0.3 }}
+                  />
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-2xl font-bold">87</span>
+                </div>
+              </div>
+            </div>
+            <div className="space-y-2 mt-2">
+              {[
+                { label: 'Ocupación', value: '72%', status: 'good' },
+                { label: 'Retención', value: '89%', status: 'good' },
+                { label: 'No-shows', value: '4%', status: 'good' },
+                { label: 'Calificación', value: '4.8', status: 'good' },
+              ].map((metric) => (
+                <div key={metric.label} className="flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">{metric.label}</span>
+                  <span className="text-emerald-400 font-medium">{metric.value}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Peak hours mini chart */}
+          <motion.div
+            variants={cardEntrance}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.1 }}
+            className="rounded-2xl p-5 bg-card/60 backdrop-blur-sm border border-white/[0.04]"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <Zap className="h-4 w-4 text-amber-400" />
+              <h2 className="font-semibold">Horas pico hoy</h2>
+            </div>
+            <div className="flex items-end gap-1.5 h-28">
+              {[30, 65, 85, 90, 45, 35, 70, 80, 95, 88, 60, 25].map((val, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ height: 0 }}
+                  animate={{ height: `${val}%` }}
+                  transition={{ duration: 0.5, delay: 0.3 + i * 0.04 }}
+                  className="flex-1 relative group cursor-pointer"
+                >
+                  <div
+                    className={cn(
+                      'w-full rounded-t-sm transition-colors',
+                      val >= 80 ? 'bg-emerald-500' : val >= 50 ? 'bg-emerald-500/50' : 'bg-zinc-700'
+                    )}
+                    style={{ height: '100%' }}
+                  />
+                  <div className="absolute -top-6 left-1/2 -translate-x-1/2 px-1.5 py-0.5 rounded bg-zinc-800 text-[9px] opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                    {val}%
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            <div className="flex justify-between text-[9px] text-zinc-600 mt-1.5">
+              <span>8am</span>
+              <span>12pm</span>
+              <span>4pm</span>
+              <span>8pm</span>
+            </div>
+            <div className="mt-3 p-2.5 rounded-lg bg-amber-500/5 border border-amber-500/20">
+              <div className="flex items-center gap-2">
+                <AlertTriangle className="h-3.5 w-3.5 text-amber-400 shrink-0" />
+                <p className="text-[11px] text-amber-400">12-2pm tiene baja ocupación. Considera un descuento.</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
         {/* Two columns: Upcoming + Professionals */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Upcoming appointments */}
@@ -212,6 +353,31 @@ export default function DashboardOverviewPage() {
             </div>
           </motion.div>
         </div>
+
+        {/* Quick actions */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-3"
+        >
+          {[
+            { label: 'Ver reseñas nuevas', icon: Star, href: '/dashboard/reviews', color: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20' },
+            { label: 'Clientes en riesgo', icon: AlertTriangle, href: '/dashboard/analytics', color: 'text-rose-400', bg: 'bg-rose-500/10', border: 'border-rose-500/20' },
+            { label: 'Gift cards activas', icon: Heart, href: '/dashboard/giftCards', color: 'text-pink-400', bg: 'bg-pink-500/10', border: 'border-pink-500/20' },
+            { label: 'Optimizar horario', icon: Zap, href: '/dashboard/scheduleOptimizer', color: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20' },
+          ].map((action) => (
+            <Link key={action.label} href={action.href}>
+              <motion.div
+                whileHover={{ y: -2, transition: { type: 'spring', stiffness: 400, damping: 15 } }}
+                className={cn('flex items-center gap-3 p-3.5 rounded-xl border cursor-pointer transition-colors', action.border, action.bg)}
+              >
+                <action.icon className={cn('h-4 w-4 shrink-0', action.color)} />
+                <span className="text-xs font-medium">{action.label}</span>
+              </motion.div>
+            </Link>
+          ))}
+        </motion.div>
       </div>
 
       <QuickBookModal

@@ -74,7 +74,13 @@ export function Header() {
               {t('header.explore')}
             </Link>
             <Link
-              href="/auth/register"
+              href="/pricing"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {t('header.pricing')}
+            </Link>
+            <Link
+              href="/for-businesses"
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               {t('header.forBusinesses')}
@@ -189,6 +195,20 @@ export function Header() {
                   className="block text-lg font-medium text-foreground hover:text-emerald-400 transition-colors"
                 >
                   {t('header.explore')}
+                </Link>
+                <Link
+                  href="/pricing"
+                  onClick={() => setMobileOpen(false)}
+                  className="block text-lg font-medium text-foreground hover:text-emerald-400 transition-colors"
+                >
+                  {t('header.pricing')}
+                </Link>
+                <Link
+                  href="/for-businesses"
+                  onClick={() => setMobileOpen(false)}
+                  className="block text-lg font-medium text-foreground hover:text-emerald-400 transition-colors"
+                >
+                  {t('header.forBusinesses')}
                 </Link>
                 <div className="section-divider my-4" />
                 <Link

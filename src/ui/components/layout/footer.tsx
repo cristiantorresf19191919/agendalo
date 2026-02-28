@@ -95,18 +95,18 @@ export function Footer() {
           <div className="space-y-3">
             <h4 className="text-sm font-semibold text-foreground">{t('footer.company')}</h4>
             <nav className="flex flex-col gap-2.5">
-              <span className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors cursor-pointer">
+              <Link href="/about" className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors">
                 {t('footer.aboutUs')}
-              </span>
-              <span className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors cursor-pointer">
-                {t('footer.careers')}
-              </span>
-              <span className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors cursor-pointer">
-                {t('footer.blog')}
-              </span>
-              <span className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors cursor-pointer">
+              </Link>
+              <Link href="/for-businesses" className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors">
+                {t('header.forBusinesses')}
+              </Link>
+              <Link href="/pricing" className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors">
+                {t('header.pricing')}
+              </Link>
+              <Link href="/faq" className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors">
                 {t('footer.contact')}
-              </span>
+              </Link>
             </nav>
           </div>
 
@@ -114,12 +114,12 @@ export function Footer() {
           <div className="space-y-3">
             <h4 className="text-sm font-semibold text-foreground">{t('footer.legal')}</h4>
             <nav className="flex flex-col gap-2.5">
-              <span className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors cursor-pointer">
+              <Link href="/terms" className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors">
                 {t('footer.terms')}
-              </span>
-              <span className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors cursor-pointer">
+              </Link>
+              <Link href="/privacy" className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors">
                 {t('footer.privacy')}
-              </span>
+              </Link>
             </nav>
           </div>
         </div>
