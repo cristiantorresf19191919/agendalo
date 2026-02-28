@@ -23,3 +23,14 @@ export type { CreateClientProfileInput, ClientProfileRepository, ClientJourneyRe
 export type { CreateGroupEventInput, GroupEventRepository, CreateGroupBookingInput, GroupBookingRepository } from './group-booking-repository';
 export type { CreateBusinessLocationInput, BusinessLocationRepository, QRCheckinRepository } from './business-location-repository';
 export type { WhatsAppConfigRepository, CreateShareableLinkInput, ShareableBookingLinkRepository } from './whatsapp-repository';
+export type { WhatsAppConversationRepository, AiAgentConfigRepository, AiBookingAgentPort } from './whatsapp-ai-agent-repository';
+export type { CreatePaymentInput, PaymentTransactionRepository, PaymentGatewayConfigRepository, InstallmentPlanRepository, PaymentGatewayPort } from './payment-repository';
+export type { InstagramConnectionRepository, InstagramPostRepository, BookThisLookLinkRepository, InstagramSyncPort } from './instagram-sync-repository';
+export type { CreateCampaignInput, MarketingCampaignRepository, MarketingTemplateRepository, WhatsAppBroadcastPort } from './marketing-campaign-repository';
+export type { CreateInvoiceInput, ElectronicInvoiceRepository, DianConfigRepository, DianIntegrationPort } from './electronic-invoice-repository';
+export type { HomeServiceConfigRepository, HomeServiceBookingRepository, GeocodingPort } from './home-service-repository';
+export type { ScheduleOptimizationRepository } from './schedule-optimizer-repository';
+export type { DigitalReceiptRepository, TipTransactionRepository } from './digital-receipt-repository';
+export type { BarrioRepository, BarrioTrendRepository, NeighborhoodSocialProofRepository } from './barrio-discovery-repository';
+export type { BeautyAssistantSessionRepository, ProactiveReminderRepository, BeautyAssistantAiPort } from './beauty-assistant-repository';
+export type { CommunityPostRepository, CommunityCommentRepository, SubstituteRequestRepository, SupplierDealRepository } from './professional-community-repository';

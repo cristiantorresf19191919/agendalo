@@ -22,6 +22,15 @@ import {
   MapPin,
   MessageCircle,
   Repeat,
+  CreditCard,
+  FileText,
+  Instagram,
+  Megaphone,
+  Home,
+  Sparkles,
+  Navigation,
+  Bot,
+  Network,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
@@ -44,6 +53,15 @@ interface SidebarProps {
     whatsapp?: string;
     recurring?: string;
     groupClasses?: string;
+    payments?: string;
+    invoicing?: string;
+    instagram?: string;
+    marketing?: string;
+    homeService?: string;
+    scheduleOptimizer?: string;
+    barrioDiscovery?: string;
+    beautyAssistant?: string;
+    community?: string;
   };
 }
 
@@ -61,6 +79,8 @@ export function Sidebar({ translations }: SidebarProps) {
 
   const featureLinks = [
     { href: '/dashboard/analytics' as const, label: translations.analytics ?? 'Analytics', icon: BarChart3 },
+    { href: '/dashboard/payments' as const, label: translations.payments ?? 'Pagos', icon: CreditCard },
+    { href: '/dashboard/invoicing' as const, label: translations.invoicing ?? 'Facturación', icon: FileText },
     { href: '/dashboard/reviews' as const, label: translations.reviews ?? 'Reseñas', icon: Star },
     { href: '/dashboard/loyalty' as const, label: translations.loyalty ?? 'Fidelización', icon: Heart },
     { href: '/dashboard/gift-cards' as const, label: translations.giftCards ?? 'Gift Cards', icon: Gift },
@@ -70,6 +90,13 @@ export function Sidebar({ translations }: SidebarProps) {
     { href: '/dashboard/group-classes' as const, label: translations.groupClasses ?? 'Clases', icon: UsersRound },
     { href: '/dashboard/locations' as const, label: translations.locations ?? 'Sucursales', icon: MapPin },
     { href: '/dashboard/whatsapp' as const, label: translations.whatsapp ?? 'WhatsApp', icon: MessageCircle },
+    { href: '/dashboard/marketing' as const, label: translations.marketing ?? 'Marketing', icon: Megaphone },
+    { href: '/dashboard/instagram' as const, label: translations.instagram ?? 'Instagram', icon: Instagram },
+    { href: '/dashboard/home-service' as const, label: translations.homeService ?? 'Domicilio', icon: Home },
+    { href: '/dashboard/schedule-optimizer' as const, label: translations.scheduleOptimizer ?? 'Optimizador', icon: Sparkles },
+    { href: '/dashboard/barrio' as const, label: translations.barrioDiscovery ?? 'Mi barrio', icon: Navigation },
+    { href: '/dashboard/beauty-assistant' as const, label: translations.beautyAssistant ?? 'Asistente IA', icon: Bot },
+    { href: '/dashboard/community' as const, label: translations.community ?? 'Comunidad', icon: Network },
   ];
 
   const links = [...mainLinks, ...featureLinks, { href: '/dashboard/settings' as const, label: translations.settings, icon: Settings }];

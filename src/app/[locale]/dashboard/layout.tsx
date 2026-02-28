@@ -31,6 +31,15 @@ export default async function DashboardLayout({ children, params }: DashboardLay
           whatsapp: t('whatsapp'),
           recurring: t('recurring'),
           groupClasses: t('groupClasses'),
+          payments: t('payments'),
+          invoicing: t('invoicing'),
+          instagram: t('instagram'),
+          marketing: t('marketing'),
+          homeService: t('homeService'),
+          scheduleOptimizer: t('scheduleOptimizer'),
+          barrioDiscovery: t('barrioDiscovery'),
+          beautyAssistant: t('beautyAssistant'),
+          community: t('community'),
         }}
       />
       <main className="flex-1 overflow-auto p-4 lg:p-8 mesh-gradient">{children}</main>
