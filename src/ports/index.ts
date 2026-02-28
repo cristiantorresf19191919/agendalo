@@ -5,3 +5,10 @@ export type { CreateServiceInput, ServiceRepository } from './service-repository
 export type { CreateBookingInput, BookingRepository } from './booking-repository';
 export type { CreateBlockedRangeInput, BlockedRangeRepository } from './blocked-range-repository';
 export type { StoragePort } from './storage-port';
+export type { CreateStaffAssignmentInput, StaffAssignmentRepository, CreateStaffBreakInput, StaffBreakRepository, CommissionRepository } from './staff-assignment-repository';
+export type { CreateWaitlistEntryInput, WaitlistRepository } from './waitlist-repository';
+export type { CreateDepositPolicyInput, DepositPolicyRepository, PaymentRecordRepository } from './deposit-policy-repository';
+export type { CreateInventoryItemInput, InventoryRepository, CreateSaleOrderInput, SaleOrderRepository } from './inventory-repository';
+export type { CreatePricingRuleInput, PricingRuleRepository } from './pricing-rule-repository';
+export type { CreatePortfolioImageInput, PortfolioRepository } from './portfolio-repository';
+export type { CreateFavoriteInput, FavoriteRepository, RebookSnapshotRepository } from './favorite-repository';

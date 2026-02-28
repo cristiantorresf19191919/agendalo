@@ -141,7 +141,7 @@ export default function RegisterPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   error={errors.password}
                 />
-                <Button type="submit" className="w-full" disabled={loading}>
+                <Button type="submit" variant="cta" size="lg" className="w-full" disabled={loading}>
                   {loading ? <Spinner size="sm" /> : t('auth.register')}
                 </Button>
               </form>

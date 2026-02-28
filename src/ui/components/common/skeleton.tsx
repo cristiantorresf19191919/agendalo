@@ -21,7 +21,7 @@ export function Skeleton({ className }: SkeletonProps) {
 
 export function BusinessCardSkeleton() {
   return (
-    <div className="rounded-2xl overflow-hidden card-surface">
+    <div className="rounded-2xl overflow-hidden bg-zinc-900/80 border border-zinc-800 shadow-lg shadow-black/30">
       <Skeleton className="h-48 w-full rounded-none" />
       <div className="p-5 space-y-3">
         <Skeleton className="h-5 w-3/4" />

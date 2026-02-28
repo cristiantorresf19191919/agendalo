@@ -25,7 +25,7 @@ export function StatCard({ title, value, icon: Icon, trend, className }: StatCar
       whileHover={hoverBounce}
       onMouseMove={handleMouseMove}
       className={cn(
-        'rounded-xl border border-border bg-card/80 backdrop-blur-sm p-5 mouse-glow',
+        'rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5 mouse-glow shadow-lg shadow-black/30',
         className
       )}
     >

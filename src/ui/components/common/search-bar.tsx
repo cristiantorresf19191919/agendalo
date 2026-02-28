@@ -22,12 +22,13 @@ export function SearchBar({ onSearch, className }: SearchBarProps) {
   return (
     <div
       className={cn(
-        'flex items-center gap-3 rounded-2xl px-4 py-3',
-        'bg-card/60 backdrop-blur-xl',
-        'shadow-lg shadow-black/10',
-        'border border-white/[0.06]',
+        'flex items-center gap-3 rounded-2xl px-5 py-3.5',
+        'bg-zinc-900/90 backdrop-blur-xl',
+        'shadow-xl shadow-black/30',
+        'border border-zinc-700/80',
+        'ring-1 ring-white/[0.06]',
         'transition-all duration-300',
-        'focus-within:ring-2 focus-within:ring-emerald-500/20 focus-within:border-emerald-500/20',
+        'focus-within:ring-2 focus-within:ring-emerald-500/30 focus-within:border-emerald-500/40 focus-within:shadow-emerald-500/10 focus-within:shadow-2xl',
         className
       )}
     >

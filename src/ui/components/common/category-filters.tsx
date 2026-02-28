@@ -35,10 +35,10 @@ export function CategoryFilters({ selected, onSelect, className }: CategoryFilte
             key={cat.id}
             onClick={() => onSelect(cat.id)}
             className={cn(
-              'relative shrink-0 flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200',
+              'relative shrink-0 flex items-center gap-2 rounded-full px-5 py-2.5 min-h-[40px] text-sm font-medium transition-all duration-200',
               isActive
                 ? 'text-emerald-400'
-                : 'text-muted-foreground hover:text-foreground hover:bg-card/60'
+                : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60'
             )}
           >
             {isActive && (

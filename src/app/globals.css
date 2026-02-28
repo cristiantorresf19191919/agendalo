@@ -29,22 +29,22 @@
 }
 
 .dark {
-  --background: 224 71% 4%;
-  --foreground: 213 31% 91%;
-  --card: 224 71% 6%;
-  --card-foreground: 213 31% 91%;
+  --background: 240 6% 4%;            /* zinc-950 */
+  --foreground: 0 0% 95%;             /* zinc-50 */
+  --card: 240 6% 10%;                 /* zinc-900 */
+  --card-foreground: 0 0% 95%;        /* zinc-50 */
   --primary: 160 84% 39%;
-  --primary-foreground: 0 0% 100%;
-  --muted: 223 47% 11%;
-  --muted-foreground: 215.4 16.3% 56.9%;
-  --border: 216 34% 17%;
+  --primary-foreground: 0 0% 0%;      /* black text on emerald CTA */
+  --muted: 240 4% 16%;               /* zinc-800 */
+  --muted-foreground: 240 5% 65%;    /* zinc-400 */
+  --border: 240 5% 26%;              /* zinc-700 — visible borders */
   --ring: 160 84% 39%;
   --available: 160 84% 39%;
   --blocked: 0 84.2% 60.2%;
 
   /* Glassmorphism tokens (dark) */
-  --glass-bg: 224 71% 6% / 0.6;
-  --glass-border: 0 0% 100% / 0.08;
+  --glass-bg: 240 6% 10% / 0.7;
+  --glass-border: 0 0% 100% / 0.12;
   --glass-blur: 16px;
 }
 
@@ -184,9 +184,11 @@ body {
   background: hsl(var(--glass-bg));
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid hsl(0 0% 100% / 0.12);
   box-shadow:
     0 0 0 1px hsl(var(--glass-border)),
-    0 4px 24px -4px rgba(0, 0, 0, 0.3);
+    0 8px 32px -8px rgba(0, 0, 0, 0.5),
+    0 4px 16px -4px rgba(0, 0, 0, 0.3);
 }
 
 /* ─── Gradient border (pseudo-element) ─── */

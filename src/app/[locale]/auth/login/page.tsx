@@ -92,7 +92,7 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 error={errors.password}
               />
-              <Button type="submit" className="w-full" disabled={loading}>
+              <Button type="submit" variant="cta" size="lg" className="w-full" disabled={loading}>
                 {loading ? <Spinner size="sm" /> : t('auth.login')}
               </Button>
             </form>
@@ -104,7 +104,7 @@ export default function LoginPage() {
                 <span className="bg-card px-2 text-muted-foreground">o</span>
               </div>
             </div>
-            <Button variant="outline" className="w-full" onClick={handleGoogleLogin} disabled={loading}>
+            <Button variant="outline" size="lg" className="w-full" onClick={handleGoogleLogin} disabled={loading}>
               {t('auth.loginWithGoogle')}
             </Button>
             <p className="mt-4 text-center text-sm text-muted-foreground">

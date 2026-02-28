@@ -81,8 +81,14 @@ export default function BookBusinessPage() {
         )}
 
         <div className="px-4 sm:px-6 space-y-6">
-          {/* Business info card */}
-          <div className={cn('relative z-10 rounded-2xl p-5 card-surface space-y-3', business.coverImageUrl && '-mt-16')}>
+          {/* Business info card — premium glassmorphism */}
+          <div className={cn(
+            'relative z-10 rounded-2xl p-5 space-y-3',
+            'bg-zinc-900/80 backdrop-blur-md',
+            'border border-white/[0.15]',
+            'shadow-xl shadow-black/50',
+            business.coverImageUrl && '-mt-16'
+          )}>
             <div className="flex items-start justify-between gap-3">
               <div>
                 <h1 className="text-2xl sm:text-3xl font-bold">{business.name}</h1>
