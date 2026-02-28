@@ -12,3 +12,14 @@ export type { CreateInventoryItemInput, InventoryRepository, CreateSaleOrderInpu
 export type { CreatePricingRuleInput, PricingRuleRepository } from './pricing-rule-repository';
 export type { CreatePortfolioImageInput, PortfolioRepository } from './portfolio-repository';
 export type { CreateFavoriteInput, FavoriteRepository, RebookSnapshotRepository } from './favorite-repository';
+export type { CreateLoyaltyProgramInput, LoyaltyProgramRepository, CustomerLoyaltyRepository, PointsTransactionRepository } from './loyalty-repository';
+export type { CreateReferralProgramInput, ReferralProgramRepository, ReferralCodeRepository, ReferralRepository } from './referral-repository';
+export type { CreateGiftCardInput, GiftCardRepository, GiftCardRedemptionRepository, GiftCardDesignRepository } from './gift-card-repository';
+export type { CreateReviewInput, ReviewRepository, BusinessRatingRepository, ProfessionalRatingRepository } from './review-repository';
+export type { AnalyticsSnapshotRepository, ServiceAnalyticsRepository, ProfessionalPerformanceRepository, ClientRetentionRepository, BusinessKPIRepository } from './analytics-repository';
+export type { CreateRecurringBookingInput, RecurringBookingRepository, CreateServiceBundleInput, ServiceBundleRepository, BundlePurchaseRepository } from './recurring-booking-repository';
+export type { CreateNotificationInput, NotificationRepository, ReminderConfigRepository } from './notification-repository';
+export type { CreateClientProfileInput, ClientProfileRepository, ClientJourneyRepository } from './client-profile-repository';
+export type { CreateGroupEventInput, GroupEventRepository, CreateGroupBookingInput, GroupBookingRepository } from './group-booking-repository';
+export type { CreateBusinessLocationInput, BusinessLocationRepository, QRCheckinRepository } from './business-location-repository';
+export type { WhatsAppConfigRepository, CreateShareableLinkInput, ShareableBookingLinkRepository } from './whatsapp-repository';

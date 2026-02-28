@@ -13,6 +13,15 @@ import {
   CheckSquare,
   ChevronLeft,
   Menu,
+  BarChart3,
+  Star,
+  Gift,
+  Heart,
+  Bell,
+  UsersRound,
+  MapPin,
+  MessageCircle,
+  Repeat,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
@@ -25,6 +34,16 @@ interface SidebarProps {
     professionals: string;
     calendar: string;
     settings: string;
+    analytics?: string;
+    reviews?: string;
+    loyalty?: string;
+    giftCards?: string;
+    notifications?: string;
+    clients?: string;
+    locations?: string;
+    whatsapp?: string;
+    recurring?: string;
+    groupClasses?: string;
   };
 }
 
@@ -32,14 +51,28 @@ export function Sidebar({ translations }: SidebarProps) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
 
-  const links = [
+  const mainLinks = [
     { href: '/dashboard/overview' as const, label: translations.overview, icon: LayoutDashboard },
     { href: '/dashboard/agenda' as const, label: 'Agenda', icon: CalendarDays },
     { href: '/dashboard/services' as const, label: translations.services, icon: Scissors },
     { href: '/dashboard/professionals' as const, label: translations.professionals, icon: Users },
     { href: '/dashboard/assign-services' as const, label: 'Asignar servicios', icon: CheckSquare },
-    { href: '/dashboard/settings' as const, label: translations.settings, icon: Settings },
   ];
+
+  const featureLinks = [
+    { href: '/dashboard/analytics' as const, label: translations.analytics ?? 'Analytics', icon: BarChart3 },
+    { href: '/dashboard/reviews' as const, label: translations.reviews ?? 'Reseñas', icon: Star },
+    { href: '/dashboard/loyalty' as const, label: translations.loyalty ?? 'Fidelización', icon: Heart },
+    { href: '/dashboard/gift-cards' as const, label: translations.giftCards ?? 'Gift Cards', icon: Gift },
+    { href: '/dashboard/clients' as const, label: translations.clients ?? 'Clientes', icon: UsersRound },
+    { href: '/dashboard/notifications' as const, label: translations.notifications ?? 'Notificaciones', icon: Bell },
+    { href: '/dashboard/recurring' as const, label: translations.recurring ?? 'Recurrentes', icon: Repeat },
+    { href: '/dashboard/group-classes' as const, label: translations.groupClasses ?? 'Clases', icon: UsersRound },
+    { href: '/dashboard/locations' as const, label: translations.locations ?? 'Sucursales', icon: MapPin },
+    { href: '/dashboard/whatsapp' as const, label: translations.whatsapp ?? 'WhatsApp', icon: MessageCircle },
+  ];
+
+  const links = [...mainLinks, ...featureLinks, { href: '/dashboard/settings' as const, label: translations.settings, icon: Settings }];
 
   return (
     <>
