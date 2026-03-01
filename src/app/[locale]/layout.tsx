@@ -5,6 +5,7 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { LayoutShell } from '@/ui/components/layout/layout-shell';
+import { ThemeProvider } from '@/ui/components/common/theme-provider';
 import '@/app/globals.css';
 
 export const metadata: Metadata = {
@@ -27,12 +28,30 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className="dark">
+    <html lang={locale} className="dark" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('agendalo-theme');
+                  if (theme === 'light') {
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch(e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className="min-h-screen bg-background text-foreground antialiased font-sans overflow-x-hidden">
         <NextIntlClientProvider messages={messages}>
-          <LayoutShell>
-            {children}
-          </LayoutShell>
+          <ThemeProvider>
+            <LayoutShell>
+              {children}
+            </LayoutShell>
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>

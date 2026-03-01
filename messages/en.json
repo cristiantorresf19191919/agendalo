@@ -98,7 +98,10 @@
     "barrioTrending": "Trending",
     "slotsLeft": "Only {count} slots left today",
     "neighborsBooked": "{count} neighbors booked here",
-    "viewingNow": "{count} people viewing now"
+    "viewingNow": "{count} people viewing now",
+    "trendingLabel": "Trending",
+    "simpleLabel": "Simple",
+    "bookingsLabel": "bookings"
   },
   "search": {
     "placeholder": "Search barbershops, spas, salons...",

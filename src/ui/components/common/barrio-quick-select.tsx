@@ -33,19 +33,19 @@ export function BarrioQuickSelect() {
             <motion.div
               whileHover={{ y: -2, transition: { type: 'spring', stiffness: 400, damping: 15 } }}
               className="flex items-center gap-2 px-4 py-2.5 rounded-full
-                bg-zinc-900/60 backdrop-blur-sm border border-zinc-800/60
+                bg-muted/80 backdrop-blur-sm border border-border
                 hover:border-emerald-500/30 hover:bg-emerald-500/5
                 transition-colors duration-200 cursor-pointer group"
             >
-              <MapPin className="h-3.5 w-3.5 text-zinc-500 group-hover:text-emerald-400 transition-colors" />
-              <span className="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors">
+              <MapPin className="h-3.5 w-3.5 text-muted-foreground group-hover:text-emerald-500 transition-colors" />
+              <span className="text-sm font-medium text-foreground group-hover:text-foreground transition-colors">
                 {barrio.name}
               </span>
-              <span className="text-xs text-zinc-600">
+              <span className="text-xs text-muted-foreground">
                 {t('barrioBusinessCount', { count: String(barrio.count) })}
               </span>
               {barrio.trending && (
-                <span className="flex items-center gap-0.5 text-[10px] font-medium text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded-full">
+                <span className="flex items-center gap-0.5 text-[10px] font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded-full">
                   <TrendingUp className="h-2.5 w-2.5" />
                   {t('barrioTrending')}
                 </span>

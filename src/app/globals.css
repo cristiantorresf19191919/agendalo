@@ -4,19 +4,25 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
+  --background: 0 0% 99%;
+  --foreground: 220 14% 10%;
   --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
+  --card-foreground: 220 14% 10%;
   --primary: 160 84% 39%;
   --primary-foreground: 0 0% 100%;
-  --muted: 210 40% 96%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --border: 214.3 31.8% 91.4%;
+  --muted: 220 14% 96%;
+  --muted-foreground: 220 8% 46%;
+  --border: 220 13% 90%;
   --ring: 160 84% 39%;
   --available: 160 84% 39%;
   --blocked: 0 84.2% 60.2%;
   --radius: 0.75rem;
+
+  /* Surface elevation (light) */
+  --surface-0: 0 0% 98%;
+  --surface-1: 220 14% 96%;
+  --surface-2: 220 13% 93%;
+  --surface-3: 220 12% 90%;
 
   /* Accent colors */
   --accent-purple: 271 75% 50%;
@@ -142,12 +148,20 @@ h1, h2, h3, h4, h5, h6, .font-display {
 }
 
 .text-gradient-hero {
-  background: linear-gradient(135deg, hsl(0, 0%, 98%) 0%, hsl(160, 84%, 55%) 40%, hsl(162, 72%, 48%) 60%, hsl(0, 0%, 90%) 100%);
+  background: linear-gradient(135deg, hsl(220, 14%, 15%) 0%, hsl(160, 84%, 35%) 40%, hsl(162, 72%, 30%) 60%, hsl(220, 14%, 20%) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: gradientShift 6s ease-in-out infinite;
+}
+
+.dark .text-gradient-hero {
+  background: linear-gradient(135deg, hsl(0, 0%, 98%) 0%, hsl(160, 84%, 55%) 40%, hsl(162, 72%, 48%) 60%, hsl(0, 0%, 90%) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* ─── Mouse-following glow (requires --mouse-x / --mouse-y set via JS) ─── */

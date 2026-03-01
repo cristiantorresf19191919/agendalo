@@ -39,9 +39,9 @@ export function Modal({ open, onOpenChange, title, description, children, classN
                 exit="exit"
                 className={cn(
                   'fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2',
-                  'rounded-2xl border border-white/[0.15] border-t-emerald-500/20 p-6',
-                  'bg-zinc-900/95 backdrop-blur-2xl',
-                  'shadow-2xl shadow-black/50',
+                  'rounded-2xl border border-border border-t-emerald-500/20 p-6',
+                  'bg-card/95 backdrop-blur-2xl',
+                  'shadow-2xl shadow-black/10 dark:shadow-black/50',
                   className
                 )}
               >

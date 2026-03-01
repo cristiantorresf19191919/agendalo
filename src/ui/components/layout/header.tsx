@@ -2,11 +2,12 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Globe, ChevronDown } from 'lucide-react';
+import { Menu, X, Globe, ChevronDown, Sun, Moon } from 'lucide-react';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { Button } from '@/ui/components/common/button';
+import { useTheme } from '@/ui/components/common/theme-provider';
 
 const LOCALES = [
   { code: 'es' as const, label: 'Español', flag: '🇨🇴' },
@@ -18,6 +19,7 @@ export function Header() {
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
+  const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
@@ -52,7 +54,7 @@ export function Header() {
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
           scrolled
-            ? 'bg-card/80 backdrop-blur-xl border-b border-white/[0.06] shadow-lg shadow-black/10'
+            ? 'bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-black/5 dark:shadow-black/10'
             : 'bg-transparent'
         )}
       >
@@ -88,7 +90,20 @@ export function Header() {
           </nav>
 
           {/* Desktop actions */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-2">
+            {/* Theme toggle */}
+            <button
+              onClick={toggleTheme}
+              className="flex items-center justify-center h-9 w-9 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? (
+                <Sun className="h-4 w-4" />
+              ) : (
+                <Moon className="h-4 w-4" />
+              )}
+            </button>
+
             {/* Language dropdown */}
             <div ref={langRef} className="relative">
               <button
@@ -96,8 +111,8 @@ export function Header() {
                 className={cn(
                   'flex items-center gap-2 text-sm font-medium px-3 py-2 rounded-xl transition-all duration-200',
                   'text-muted-foreground hover:text-foreground',
-                  'hover:bg-white/[0.06] border border-transparent',
-                  langOpen && 'bg-white/[0.06] border-white/[0.08] text-foreground'
+                  'hover:bg-muted/50 border border-transparent',
+                  langOpen && 'bg-muted/50 border-border text-foreground'
                 )}
               >
                 <span className="text-base leading-none">{currentLocale.flag}</span>
@@ -111,7 +126,7 @@ export function Header() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -4, scale: 0.95 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute right-0 top-full mt-2 w-44 rounded-xl bg-zinc-900/95 backdrop-blur-xl border border-white/[0.08] shadow-2xl shadow-black/40 overflow-hidden"
+                    className="absolute right-0 top-full mt-2 w-44 rounded-xl bg-card/95 backdrop-blur-xl border border-border shadow-2xl shadow-black/20 dark:shadow-black/40 overflow-hidden"
                   >
                     {LOCALES.map((loc) => (
                       <button
@@ -120,14 +135,14 @@ export function Header() {
                         className={cn(
                           'flex items-center gap-3 w-full px-4 py-3 text-sm transition-colors',
                           loc.code === locale
-                            ? 'bg-emerald-500/10 text-emerald-400 font-medium'
-                            : 'text-muted-foreground hover:text-foreground hover:bg-white/[0.04]'
+                            ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-medium'
+                            : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                         )}
                       >
                         <span className="text-lg leading-none">{loc.flag}</span>
                         <span>{loc.label}</span>
                         {loc.code === locale && (
-                          <div className="ml-auto h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                          <div className="ml-auto h-1.5 w-1.5 rounded-full bg-emerald-500" />
                         )}
                       </button>
                     ))}
@@ -149,16 +164,29 @@ export function Header() {
           </div>
 
           {/* Mobile menu toggle */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-muted/50 transition-colors"
-          >
-            {mobileOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
-          </button>
+          <div className="flex md:hidden items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg hover:bg-muted/50 transition-colors"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? (
+                <Sun className="h-5 w-5 text-muted-foreground" />
+              ) : (
+                <Moon className="h-5 w-5 text-muted-foreground" />
+              )}
+            </button>
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="p-2 rounded-lg hover:bg-muted/50 transition-colors"
+            >
+              {mobileOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </button>
+          </div>
         </div>
       </motion.header>
 
@@ -178,7 +206,7 @@ export function Header() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="fixed top-0 right-0 bottom-0 z-50 w-72 bg-card/95 backdrop-blur-xl border-l border-white/[0.06] p-6 md:hidden"
+              className="fixed top-0 right-0 bottom-0 z-50 w-72 bg-card/95 backdrop-blur-xl border-l border-border p-6 md:hidden"
             >
               <div className="flex justify-end mb-8">
                 <button
@@ -189,40 +217,20 @@ export function Header() {
                 </button>
               </div>
               <nav className="space-y-4">
-                <Link
-                  href="/"
-                  onClick={() => setMobileOpen(false)}
-                  className="block text-lg font-medium text-foreground hover:text-emerald-400 transition-colors"
-                >
+                <Link href="/" onClick={() => setMobileOpen(false)} className="block text-lg font-medium text-foreground hover:text-emerald-500 transition-colors">
                   {t('header.explore')}
                 </Link>
-                <Link
-                  href="/pricing"
-                  onClick={() => setMobileOpen(false)}
-                  className="block text-lg font-medium text-foreground hover:text-emerald-400 transition-colors"
-                >
+                <Link href="/pricing" onClick={() => setMobileOpen(false)} className="block text-lg font-medium text-foreground hover:text-emerald-500 transition-colors">
                   {t('header.pricing')}
                 </Link>
-                <Link
-                  href="/for-businesses"
-                  onClick={() => setMobileOpen(false)}
-                  className="block text-lg font-medium text-foreground hover:text-emerald-400 transition-colors"
-                >
+                <Link href="/for-businesses" onClick={() => setMobileOpen(false)} className="block text-lg font-medium text-foreground hover:text-emerald-500 transition-colors">
                   {t('header.forBusinesses')}
                 </Link>
                 <div className="section-divider my-4" />
-                <Link
-                  href="/auth/login"
-                  onClick={() => setMobileOpen(false)}
-                  className="block text-lg font-medium text-foreground hover:text-emerald-400 transition-colors"
-                >
+                <Link href="/auth/login" onClick={() => setMobileOpen(false)} className="block text-lg font-medium text-foreground hover:text-emerald-500 transition-colors">
                   {t('auth.login')}
                 </Link>
-                <Link
-                  href="/auth/register"
-                  onClick={() => setMobileOpen(false)}
-                  className="block text-lg font-medium text-foreground hover:text-emerald-400 transition-colors"
-                >
+                <Link href="/auth/register" onClick={() => setMobileOpen(false)} className="block text-lg font-medium text-foreground hover:text-emerald-500 transition-colors">
                   {t('auth.register')}
                 </Link>
                 <div className="section-divider my-4" />
@@ -243,8 +251,8 @@ export function Header() {
                         className={cn(
                           'flex items-center gap-2 flex-1 px-3 py-2.5 rounded-xl text-sm font-medium transition-all',
                           loc.code === locale
-                            ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
-                            : 'bg-white/[0.04] text-muted-foreground border border-white/[0.06] hover:bg-white/[0.08]'
+                            ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30'
+                            : 'bg-muted/50 text-muted-foreground border border-border hover:bg-muted'
                         )}
                       >
                         <span className="text-base">{loc.flag}</span>

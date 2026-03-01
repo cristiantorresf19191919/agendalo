@@ -174,7 +174,7 @@ export function Sidebar({ translations }: SidebarProps) {
           <div
             className={cn(
               'relative flex items-center gap-3 rounded-lg px-3 py-2 text-[13px] font-medium transition-colors',
-              isActive ? 'text-emerald-400' : 'text-zinc-500 hover:text-zinc-300 hover:bg-white/[0.02]',
+              isActive ? 'text-emerald-400' : 'text-muted-foreground hover:text-foreground hover:bg-muted/50',
               collapsed && 'justify-center px-2'
             )}
             title={collapsed ? link.label : undefined}
@@ -224,7 +224,7 @@ export function Sidebar({ translations }: SidebarProps) {
         )}
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="hidden lg:flex p-1.5 rounded-lg hover:bg-white/[0.04] transition-colors text-zinc-600 hover:text-zinc-400"
+          className="hidden lg:flex p-1.5 rounded-lg hover:bg-muted/50 transition-colors text-muted-foreground hover:text-muted-foreground"
         >
           <ChevronLeft className={cn('h-4 w-4 transition-transform', collapsed && 'rotate-180')} />
         </button>
@@ -233,14 +233,14 @@ export function Sidebar({ translations }: SidebarProps) {
       {/* Search (desktop expanded only) */}
       {!collapsed && (
         <div className="px-3 mb-3">
-          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.02] border border-white/[0.04] text-zinc-600 focus-within:border-emerald-500/20 focus-within:text-zinc-400 transition-colors">
+          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-muted/30 border border-border text-muted-foreground focus-within:border-emerald-500/20 focus-within:text-muted-foreground transition-colors">
             <Search className="h-3.5 w-3.5 shrink-0" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search..."
-              className="flex-1 bg-transparent text-xs text-zinc-300 placeholder:text-zinc-600 outline-none"
+              className="flex-1 bg-transparent text-xs text-foreground placeholder:text-muted-foreground outline-none"
             />
           </div>
         </div>
@@ -248,7 +248,7 @@ export function Sidebar({ translations }: SidebarProps) {
 
       {/* User card */}
       {!collapsed && (
-        <div className="mx-3 mb-3 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+        <div className="mx-3 mb-3 p-3 rounded-xl bg-muted/30 border border-border">
           <div className="flex items-center gap-3">
             <div className="relative h-9 w-9 rounded-full overflow-hidden ring-2 ring-emerald-500/20">
               <Image
@@ -260,7 +260,7 @@ export function Sidebar({ translations }: SidebarProps) {
             </div>
             <div className="min-w-0 flex-1">
               <p className="text-sm font-semibold truncate font-display">Dulciniana</p>
-              <p className="text-[11px] text-zinc-600 truncate">Admin · Barbería Urbana</p>
+              <p className="text-[11px] text-muted-foreground truncate">Admin · Barbería Urbana</p>
             </div>
             <div className="h-2 w-2 rounded-full bg-emerald-400 shrink-0" />
           </div>
@@ -274,7 +274,7 @@ export function Sidebar({ translations }: SidebarProps) {
             {filteredItems.length > 0 ? (
               filteredItems.map((item) => renderNavItem(item))
             ) : (
-              <p className="text-xs text-zinc-600 text-center py-4">No results</p>
+              <p className="text-xs text-muted-foreground text-center py-4">No results</p>
             )}
           </div>
         ) : (
@@ -283,7 +283,7 @@ export function Sidebar({ translations }: SidebarProps) {
               {!collapsed && (
                 <button
                   onClick={() => toggleGroup(group.title)}
-                  className="flex items-center justify-between w-full px-3 py-2 text-[10px] font-semibold uppercase tracking-widest text-zinc-600 hover:text-zinc-500 transition-colors"
+                  className="flex items-center justify-between w-full px-3 py-2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground hover:text-foreground/60 transition-colors"
                 >
                   <span>{groupLabels[group.title]}</span>
                   <ChevronDown className={cn('h-3 w-3 transition-transform', !expandedGroups[group.title] && '-rotate-90')} />
@@ -307,25 +307,25 @@ export function Sidebar({ translations }: SidebarProps) {
         )}
 
         {/* Settings always visible */}
-        <div className="pt-2 border-t border-white/[0.03] mt-2">
+        <div className="pt-2 border-t border-border/50 mt-2">
           {renderNavItem(settingsLink, false)}
         </div>
       </nav>
 
       {/* Bottom area */}
       {!collapsed && (
-        <div className="p-3 border-t border-white/[0.03] space-y-1 shrink-0">
-          <button className="flex items-center gap-3 w-full px-3 py-2 rounded-lg text-[13px] text-zinc-600 hover:text-zinc-400 hover:bg-white/[0.02] transition-colors">
+        <div className="p-3 border-t border-border/50 space-y-1 shrink-0">
+          <button className="flex items-center gap-3 w-full px-3 py-2 rounded-lg text-[13px] text-muted-foreground hover:text-muted-foreground hover:bg-muted/30 transition-colors">
             <HelpCircle className="h-[18px] w-[18px]" />
             <span>Help & Support</span>
           </button>
           <Link href="/">
-            <div className="flex items-center gap-3 w-full px-3 py-2 rounded-lg text-[13px] text-zinc-600 hover:text-rose-400 hover:bg-rose-500/5 transition-colors">
+            <div className="flex items-center gap-3 w-full px-3 py-2 rounded-lg text-[13px] text-muted-foreground hover:text-rose-400 hover:bg-rose-500/5 transition-colors">
               <LogOut className="h-[18px] w-[18px]" />
               <span>Exit Dashboard</span>
             </div>
           </Link>
-          <p className="text-[10px] text-zinc-700 text-center pt-2">
+          <p className="text-[10px] text-muted-foreground/50 text-center pt-2">
             Agendalo Business v1.0
           </p>
         </div>
@@ -336,12 +336,12 @@ export function Sidebar({ translations }: SidebarProps) {
   return (
     <>
       {/* Mobile top bar */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 z-40 h-14 flex items-center px-4 bg-[hsl(var(--surface-1))]/95 backdrop-blur-xl border-b border-white/[0.04]">
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-40 h-14 flex items-center px-4 bg-[hsl(var(--surface-1))]/95 backdrop-blur-xl border-b border-border">
         <button
           onClick={() => setMobileOpen(true)}
-          className="p-2 rounded-lg hover:bg-white/[0.04] transition-colors"
+          className="p-2 rounded-lg hover:bg-muted/50 transition-colors"
         >
-          <Menu className="h-5 w-5 text-zinc-400" />
+          <Menu className="h-5 w-5 text-muted-foreground" />
         </button>
         <span className="ml-3 text-lg font-bold text-gradient-primary font-display">Agendalo</span>
       </div>
@@ -362,7 +362,7 @@ export function Sidebar({ translations }: SidebarProps) {
       {/* Sidebar */}
       <aside
         className={cn(
-          'fixed lg:relative z-50 lg:z-auto flex flex-col border-r border-white/[0.04] bg-[hsl(var(--surface-0))] transition-all duration-300',
+          'fixed lg:relative z-50 lg:z-auto flex flex-col border-r border-border bg-[hsl(var(--surface-0))] transition-all duration-300',
           collapsed ? 'lg:w-[72px]' : 'lg:w-64',
           mobileOpen ? 'translate-x-0 w-72' : '-translate-x-full lg:translate-x-0 w-72',
           'h-screen top-0 left-0'
@@ -371,7 +371,7 @@ export function Sidebar({ translations }: SidebarProps) {
         {/* Mobile close */}
         <button
           onClick={() => setMobileOpen(false)}
-          className="lg:hidden absolute top-4 right-4 p-1.5 rounded-lg hover:bg-white/[0.04] transition-colors text-zinc-600"
+          className="lg:hidden absolute top-4 right-4 p-1.5 rounded-lg hover:bg-muted/50 transition-colors text-muted-foreground"
         >
           <X className="h-4 w-4" />
         </button>

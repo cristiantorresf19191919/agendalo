@@ -40,7 +40,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="border-t border-zinc-800/60 bg-zinc-950/80">
+    <footer className="border-t border-border bg-muted/50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
@@ -51,7 +51,7 @@ export function Footer() {
               </div>
               <span className="text-xl font-bold text-gradient-primary font-display">Agendalo</span>
             </Link>
-            <p className="text-sm text-zinc-500 max-w-xs">
+            <p className="text-sm text-muted-foreground max-w-xs">
               {t('footer.tagline')}
             </p>
             {/* Social links */}
@@ -61,7 +61,7 @@ export function Footer() {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="flex items-center justify-center h-9 w-9 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-500 hover:text-emerald-400 hover:border-emerald-500/30 hover:bg-emerald-500/5 transition-all duration-200"
+                  className="flex items-center justify-center h-9 w-9 rounded-xl bg-muted border border-border text-muted-foreground hover:text-emerald-400 hover:border-emerald-500/30 hover:bg-emerald-500/5 transition-all duration-200"
                 >
                   <social.icon className="h-4 w-4" />
                 </a>
@@ -73,19 +73,19 @@ export function Footer() {
           <div className="space-y-3">
             <h4 className="text-sm font-semibold text-foreground">{t('footer.explore')}</h4>
             <nav className="flex flex-col gap-2.5">
-              <Link href="/" className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors">
+              <Link href="/" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
                 {t('search.barbershop')}
               </Link>
-              <Link href="/" className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors">
+              <Link href="/" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
                 {t('search.spa')}
               </Link>
-              <Link href="/" className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors">
+              <Link href="/" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
                 {t('search.beautySalon')}
               </Link>
-              <Link href="/" className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors">
+              <Link href="/" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
                 {t('search.nailSalon')}
               </Link>
-              <Link href="/" className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors">
+              <Link href="/" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
                 {t('search.aestheticClinic')}
               </Link>
             </nav>
@@ -95,16 +95,16 @@ export function Footer() {
           <div className="space-y-3">
             <h4 className="text-sm font-semibold text-foreground">{t('footer.company')}</h4>
             <nav className="flex flex-col gap-2.5">
-              <Link href="/about" className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors">
+              <Link href="/about" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
                 {t('footer.aboutUs')}
               </Link>
-              <Link href="/for-businesses" className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors">
+              <Link href="/for-businesses" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
                 {t('header.forBusinesses')}
               </Link>
-              <Link href="/pricing" className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors">
+              <Link href="/pricing" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
                 {t('header.pricing')}
               </Link>
-              <Link href="/faq" className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors">
+              <Link href="/faq" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
                 {t('footer.contact')}
               </Link>
             </nav>
@@ -114,10 +114,10 @@ export function Footer() {
           <div className="space-y-3">
             <h4 className="text-sm font-semibold text-foreground">{t('footer.legal')}</h4>
             <nav className="flex flex-col gap-2.5">
-              <Link href="/terms" className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors">
+              <Link href="/terms" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
                 {t('footer.terms')}
               </Link>
-              <Link href="/privacy" className="text-sm text-zinc-500 hover:text-emerald-400 transition-colors">
+              <Link href="/privacy" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
                 {t('footer.privacy')}
               </Link>
             </nav>
@@ -125,8 +125,8 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="h-px bg-zinc-800/60 mt-10 mb-6" />
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-zinc-500">
+        <div className="h-px bg-border/60 mt-10 mb-6" />
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground">
           <p>&copy; 2026 Agendalo. {t('footer.rights')}</p>
           <p className="flex items-center gap-1">
             {t('footer.madeWith')} <Heart className="h-3 w-3 text-rose-500 fill-rose-500" />

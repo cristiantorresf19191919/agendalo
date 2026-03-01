@@ -46,10 +46,10 @@ export function BusinessCard({ business, className }: BusinessCardProps) {
       onMouseMove={handleMouseMove}
       className={cn(
         'group rounded-2xl overflow-hidden cursor-pointer mouse-glow',
-        'bg-zinc-900/80 backdrop-blur-xl',
-        'shadow-lg shadow-black/30',
-        'border border-zinc-800',
-        'hover:shadow-xl hover:shadow-emerald-500/[0.1] hover:border-zinc-700',
+        'bg-card backdrop-blur-xl',
+        'shadow-lg shadow-black/5 dark:shadow-black/30',
+        'border border-border',
+        'hover:shadow-xl hover:shadow-emerald-500/[0.1] hover:border-emerald-500/20',
         'transition-all duration-300',
         className
       )}

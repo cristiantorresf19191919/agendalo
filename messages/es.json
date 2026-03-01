@@ -98,7 +98,10 @@
     "barrioTrending": "En tendencia",
     "slotsLeft": "Solo {count} cupos hoy",
     "neighborsBooked": "{count} vecinos reservaron aquí",
-    "viewingNow": "{count} personas viendo ahora"
+    "viewingNow": "{count} personas viendo ahora",
+    "trendingLabel": "En tendencia",
+    "simpleLabel": "Así de fácil",
+    "bookingsLabel": "reservas"
   },
   "search": {
     "placeholder": "Buscar barberías, spas, salones...",

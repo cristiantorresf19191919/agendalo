@@ -14,9 +14,9 @@ const buttonVariants = cva(
       variant: {
         default: 'bg-emerald-500 text-black font-bold shadow-md shadow-emerald-500/25 hover:bg-emerald-400 hover:shadow-emerald-500/40',
         destructive: 'bg-rose-500 text-white shadow-sm hover:bg-rose-600',
-        outline: 'border border-zinc-700 bg-zinc-900 text-zinc-100 hover:bg-zinc-800 hover:border-zinc-600',
-        secondary: 'bg-zinc-800 text-zinc-100 hover:bg-zinc-700',
-        ghost: 'text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100',
+        outline: 'border border-border bg-card text-foreground hover:bg-muted hover:border-border',
+        secondary: 'bg-muted text-foreground hover:bg-muted/80',
+        ghost: 'text-muted-foreground hover:bg-muted hover:text-foreground',
         link: 'text-emerald-500 underline-offset-4 hover:underline',
         available: 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 hover:bg-emerald-500/20',
         cta: 'bg-gradient-to-r from-emerald-500 to-teal-400 text-black font-bold shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:brightness-110 cta-shine',

@@ -38,7 +38,7 @@ export function CategoryFilters({ selected, onSelect, className }: CategoryFilte
               'relative shrink-0 flex items-center gap-2 rounded-full px-5 py-2.5 min-h-[40px] text-sm font-medium transition-all duration-200',
               isActive
                 ? 'text-emerald-400'
-                : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60'
+                : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
             )}
           >
             {isActive && (

@@ -64,14 +64,14 @@ export function LiveActivityTicker() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -16 }}
           transition={{ duration: 0.3, ease: 'easeOut' }}
-          className="flex items-center gap-2 text-sm text-zinc-400 absolute inset-0 justify-center"
+          className="flex items-center gap-2 text-sm text-muted-foreground absolute inset-0 justify-center"
         >
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
           </span>
           <span>{activity.text}</span>
-          <span className="flex items-center gap-0.5 text-zinc-600">
+          <span className="flex items-center gap-0.5 text-muted-foreground/60">
             <MapPin className="h-3 w-3" />
             {activity.timeAgo}
           </span>

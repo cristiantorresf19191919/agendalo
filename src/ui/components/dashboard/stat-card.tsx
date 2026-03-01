@@ -20,12 +20,12 @@ export function StatCard({ title, value, icon: Icon, trend, className }: StatCar
       variants={staggerItem}
       whileHover={{ y: -2, transition: { type: 'spring', stiffness: 400, damping: 15 } }}
       className={cn(
-        'rounded-2xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5 transition-colors hover:border-white/[0.06]',
+        'rounded-2xl border border-border bg-[hsl(var(--surface-1))] p-5 transition-colors hover:border-border',
         className
       )}
     >
       <div className="flex items-center justify-between">
-        <span className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider">{title}</span>
+        <span className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider">{title}</span>
         <div className="h-8 w-8 rounded-lg bg-emerald-500/8 flex items-center justify-center">
           <Icon className="h-4 w-4 text-emerald-400" />
         </div>

@@ -23,10 +23,9 @@ export function SearchBar({ onSearch, className }: SearchBarProps) {
     <div
       className={cn(
         'flex items-center gap-3 rounded-2xl px-5 py-3.5',
-        'bg-zinc-900/90 backdrop-blur-xl',
-        'shadow-xl shadow-black/30',
-        'border border-zinc-700/80',
-        'ring-1 ring-white/[0.06]',
+        'bg-card/90 backdrop-blur-xl',
+        'shadow-lg shadow-black/5 dark:shadow-black/30',
+        'border border-border',
         'transition-all duration-300',
         'focus-within:ring-2 focus-within:ring-emerald-500/30 focus-within:border-emerald-500/40 focus-within:shadow-emerald-500/10 focus-within:shadow-2xl',
         className
@@ -48,8 +47,8 @@ export function SearchBar({ onSearch, className }: SearchBarProps) {
           <X className="h-4 w-4 text-muted-foreground" />
         </button>
       )}
-      <div className="shrink-0 flex items-center gap-1 text-xs text-muted-foreground border-l border-white/[0.06] pl-3">
-        <MapPin className="h-3.5 w-3.5 text-emerald-400" />
+      <div className="shrink-0 flex items-center gap-1 text-xs text-muted-foreground border-l border-border pl-3">
+        <MapPin className="h-3.5 w-3.5 text-emerald-500" />
         <span>Bogotá</span>
       </div>
     </div>

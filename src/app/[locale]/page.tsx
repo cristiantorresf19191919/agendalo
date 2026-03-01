@@ -182,7 +182,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-            className="text-base sm:text-lg md:text-xl text-zinc-400 max-w-xl mx-auto mt-6 leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl mx-auto mt-6 leading-relaxed"
           >
             {t('home.heroSubtitle')}
           </motion.p>
@@ -213,10 +213,10 @@ export default function HomePage() {
             <Button
               variant="outline"
               size="lg"
-              className="gap-2 rounded-xl border-zinc-700/60 hover:border-zinc-600 bg-zinc-900/30 backdrop-blur-sm"
+              className="gap-2 rounded-xl border-border hover:border-muted-foreground/30 bg-card/30 backdrop-blur-sm"
               onClick={() => setFilterOpen(true)}
             >
-              <SlidersHorizontal className="h-4 w-4 text-zinc-400" />
+              <SlidersHorizontal className="h-4 w-4 text-muted-foreground" />
               {t('search.advancedFilters')}
             </Button>
           </motion.div>
@@ -234,14 +234,14 @@ export default function HomePage() {
                 {['M', 'C', 'A', 'L', 'S'].map((letter, i) => (
                   <div
                     key={i}
-                    className="h-8 w-8 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 border-2 border-zinc-950 flex items-center justify-center text-[10px] font-bold text-white"
+                    className="h-8 w-8 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 border-2 border-background flex items-center justify-center text-[10px] font-bold text-white"
                     style={{ zIndex: 5 - i }}
                   >
                     {letter}
                   </div>
                 ))}
               </div>
-              <span className="text-sm text-zinc-500">{t('home.trustedBy')}</span>
+              <span className="text-sm text-muted-foreground">{t('home.trustedBy')}</span>
             </div>
 
             {/* Rating badge */}
@@ -251,9 +251,9 @@ export default function HomePage() {
                   <Star key={i} className="h-3.5 w-3.5 text-amber-400 fill-amber-400" />
                 ))}
               </div>
-              <span className="text-zinc-400 font-medium">4.9</span>
-              <span className="text-zinc-600">/</span>
-              <span className="text-zinc-500">5.0</span>
+              <span className="text-foreground font-medium">4.9</span>
+              <span className="text-muted-foreground/50">/</span>
+              <span className="text-muted-foreground">5.0</span>
             </div>
           </motion.div>
 
@@ -277,9 +277,9 @@ export default function HomePage() {
         <ScrollReveal>
           <div className="flex items-end justify-between mb-10">
             <div>
-              <p className="text-emerald-400 text-sm font-semibold tracking-wide uppercase mb-2">Trending</p>
+              <p className="text-emerald-400 text-sm font-semibold tracking-wide uppercase mb-2">{t('home.trendingLabel')}</p>
               <h2 className="text-2xl sm:text-3xl font-bold font-display">{t('home.popularServices')}</h2>
-              <p className="text-sm text-zinc-500 mt-2 max-w-md">{t('home.popularServicesDesc')}</p>
+              <p className="text-sm text-muted-foreground mt-2 max-w-md">{t('home.popularServicesDesc')}</p>
             </div>
             <Link href="/discover" className="hidden sm:flex items-center gap-1 text-sm text-emerald-400 hover:text-emerald-300 transition-colors font-medium">
               {t('business.seeAll')}
@@ -293,19 +293,19 @@ export default function HomePage() {
               <motion.div
                 whileHover={{ y: -6, transition: { type: 'spring', stiffness: 400, damping: 15 } }}
                 className="group relative rounded-2xl p-6 cursor-pointer overflow-hidden
-                  bg-[hsl(var(--surface-1))] border border-white/[0.04]
+                  bg-[hsl(var(--surface-1))] border border-border/50
                   hover:border-emerald-500/20 hover:shadow-xl hover:shadow-emerald-500/[0.06] transition-all duration-300"
               >
                 <div className="flex items-start justify-between mb-5">
                   <div className="inline-flex items-center justify-center rounded-xl bg-emerald-500/8 p-3.5">
                     <service.icon className="h-5 w-5 text-emerald-400" />
                   </div>
-                  <ArrowRight className="h-4 w-4 text-zinc-700 group-hover:text-emerald-400 group-hover:translate-x-0.5 transition-all" />
+                  <ArrowRight className="h-4 w-4 text-muted-foreground/50 group-hover:text-emerald-400 group-hover:translate-x-0.5 transition-all" />
                 </div>
                 <h3 className="font-semibold text-[15px] text-foreground font-display">{service.name}</h3>
                 <div className="flex items-center justify-between mt-3">
                   <p className="text-lg font-bold text-emerald-400">{service.price}</p>
-                  <p className="text-[11px] text-zinc-600 font-medium">{service.bookings} bookings</p>
+                  <p className="text-[11px] text-muted-foreground font-medium">{service.bookings} {t('home.bookingsLabel')}</p>
                 </div>
               </motion.div>
             </ScrollReveal>
@@ -319,7 +319,7 @@ export default function HomePage() {
           <div className="text-center mb-10">
             <p className="text-emerald-400 text-sm font-semibold tracking-wide uppercase mb-2">{t('home.barrioTrending')}</p>
             <h2 className="text-2xl sm:text-3xl font-bold font-display">{t('home.barrioSectionTitle')}</h2>
-            <p className="text-sm text-zinc-500 mt-2">{t('home.barrioSectionDesc')}</p>
+            <p className="text-sm text-muted-foreground mt-2">{t('home.barrioSectionDesc')}</p>
           </div>
         </ScrollReveal>
         <BarrioQuickSelect />
@@ -374,8 +374,8 @@ export default function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex flex-col items-center justify-center py-20 text-center"
               >
-                <div className="rounded-2xl bg-zinc-900/60 p-5 mb-4 border border-white/[0.04]">
-                  <SearchX className="h-8 w-8 text-zinc-600" />
+                <div className="rounded-2xl bg-muted/60 p-5 mb-4 border border-border/50">
+                  <SearchX className="h-8 w-8 text-muted-foreground" />
                 </div>
                 <h3 className="text-lg font-semibold font-display">{t('home.noResults')}</h3>
                 <p className="text-sm text-muted-foreground mt-1">{t('home.tryDifferent')}</p>
@@ -398,13 +398,13 @@ export default function HomePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="relative text-center p-6 md:p-8 rounded-2xl bg-[hsl(var(--surface-1))] border border-white/[0.04] group hover:border-emerald-500/15 transition-colors duration-300"
+                  className="relative text-center p-6 md:p-8 rounded-2xl bg-[hsl(var(--surface-1))] border border-border/50 group hover:border-emerald-500/15 transition-colors duration-300"
                 >
                   <div className="inline-flex items-center justify-center rounded-xl bg-emerald-500/8 p-3 mb-4">
                     <stat.icon className="h-5 w-5 text-emerald-400" />
                   </div>
                   <p className="text-3xl sm:text-4xl font-extrabold text-gradient-primary font-display">{stat.value}</p>
-                  <p className="text-xs sm:text-sm text-zinc-500 mt-2 font-medium">{stat.label}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-2 font-medium">{stat.label}</p>
                 </motion.div>
               ))}
             </div>
@@ -416,9 +416,9 @@ export default function HomePage() {
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-20">
         <ScrollReveal>
           <div className="text-center mb-14">
-            <p className="text-emerald-400 text-sm font-semibold tracking-wide uppercase mb-2">Simple</p>
+            <p className="text-emerald-400 text-sm font-semibold tracking-wide uppercase mb-2">{t('home.simpleLabel')}</p>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-display">{t('home.howItWorks')}</h2>
-            <p className="text-zinc-500 mt-3 max-w-md mx-auto">{t('home.howItWorksDesc')}</p>
+            <p className="text-muted-foreground mt-3 max-w-md mx-auto">{t('home.howItWorksDesc')}</p>
           </div>
         </ScrollReveal>
 
@@ -428,7 +428,7 @@ export default function HomePage() {
               <motion.div
                 whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 15 } }}
                 className="relative rounded-2xl p-6 overflow-hidden
-                  bg-[hsl(var(--surface-1))] border border-white/[0.04]
+                  bg-[hsl(var(--surface-1))] border border-border/50
                   hover:border-emerald-500/15 transition-all duration-300 group"
               >
                 {/* Step number watermark */}
@@ -445,12 +445,12 @@ export default function HomePage() {
                     <span className="text-xs font-bold text-emerald-400/60 tracking-widest uppercase">{step.num}</span>
                   </div>
                   <h3 className="font-bold text-lg font-display">{step.title}</h3>
-                  <p className="text-sm text-zinc-500 mt-2 leading-relaxed">{step.desc}</p>
+                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{step.desc}</p>
                 </div>
 
                 {/* Connector line on desktop */}
                 {i < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-3 w-6 border-t border-dashed border-zinc-800" />
+                  <div className="hidden lg:block absolute top-1/2 -right-3 w-6 border-t border-dashed border-border" />
                 )}
               </motion.div>
             </ScrollReveal>
@@ -473,7 +473,7 @@ export default function HomePage() {
               <motion.div
                 whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 15 } }}
                 className="relative rounded-2xl p-7 space-y-5 overflow-hidden
-                  bg-[hsl(var(--surface-1))] border border-white/[0.04]
+                  bg-[hsl(var(--surface-1))] border border-border/50
                   hover:border-emerald-500/15 transition-all duration-300 group"
               >
                 <div className="inline-flex items-center justify-center rounded-2xl bg-emerald-500/8 p-4">
@@ -481,7 +481,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <h3 className="font-bold text-lg font-display">{feat.title}</h3>
-                  <p className="text-sm text-zinc-500 mt-2 leading-relaxed">{feat.desc}</p>
+                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{feat.desc}</p>
                 </div>
               </motion.div>
             </ScrollReveal>
@@ -497,7 +497,7 @@ export default function HomePage() {
             <div className="text-center mb-14">
               <p className="text-emerald-400 text-sm font-semibold tracking-wide uppercase mb-2">{t('business.reviews')}</p>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-display">{t('home.testimonials')}</h2>
-              <p className="text-zinc-500 mt-3 max-w-md mx-auto">{t('home.testimonialsDesc')}</p>
+              <p className="text-muted-foreground mt-3 max-w-md mx-auto">{t('home.testimonialsDesc')}</p>
             </div>
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -505,7 +505,7 @@ export default function HomePage() {
               <ScrollReveal key={i} delay={i * 0.1}>
                 <motion.div
                   whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 15 } }}
-                  className="rounded-2xl p-7 bg-[hsl(var(--surface-1))] border border-white/[0.04] hover:border-emerald-500/10 transition-all duration-300 flex flex-col"
+                  className="rounded-2xl p-7 bg-[hsl(var(--surface-1))] border border-border/50 hover:border-emerald-500/10 transition-all duration-300 flex flex-col"
                 >
                   {/* Stars */}
                   <div className="flex items-center gap-1 mb-5">
@@ -514,17 +514,17 @@ export default function HomePage() {
                     ))}
                   </div>
 
-                  <p className="text-[15px] text-zinc-300 leading-relaxed flex-1">
+                  <p className="text-[15px] text-foreground/80 leading-relaxed flex-1">
                     &ldquo;{item.text}&rdquo;
                   </p>
 
-                  <div className="flex items-center gap-3 mt-6 pt-5 border-t border-white/[0.04]">
+                  <div className="flex items-center gap-3 mt-6 pt-5 border-t border-border/50">
                     <div className="h-10 w-10 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-sm font-bold text-white">
                       {item.avatar}
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-foreground">{item.author}</p>
-                      <p className="text-xs text-zinc-500">{item.role}</p>
+                      <p className="text-xs text-muted-foreground">{item.role}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -554,7 +554,7 @@ export default function HomePage() {
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-display mb-4">
                   {t('home.registerBusiness')}
                 </h2>
-                <p className="text-zinc-400 mb-10 text-base sm:text-lg leading-relaxed">
+                <p className="text-muted-foreground mb-10 text-base sm:text-lg leading-relaxed">
                   {t('home.registerBusinessCta')}
                 </p>
 
@@ -565,7 +565,7 @@ export default function HomePage() {
                     t('home.registerBusinessBenefit2'),
                     t('home.registerBusinessBenefit3'),
                   ].map((benefit, i) => (
-                    <div key={i} className="flex items-center gap-2 text-sm text-zinc-400">
+                    <div key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
                       <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
                       {benefit}
                     </div>
