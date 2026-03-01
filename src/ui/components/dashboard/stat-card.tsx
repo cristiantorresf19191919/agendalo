@@ -1,11 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { type LucideIcon } from 'lucide-react';
+import { type LucideIcon, TrendingUp, TrendingDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { stretchyCard, hoverBounce } from '@/ui/animations/variants';
+import { staggerItem } from '@/ui/animations/variants';
 import { AnimatedCounter } from '@/ui/components/common/animated-counter';
-import { useMouseGlow } from '@/ui/hooks/use-mouse-glow';
 
 interface StatCardProps {
   title: string;
@@ -16,25 +15,23 @@ interface StatCardProps {
 }
 
 export function StatCard({ title, value, icon: Icon, trend, className }: StatCardProps) {
-  const { ref, handleMouseMove } = useMouseGlow();
-
   return (
     <motion.div
-      ref={ref}
-      variants={stretchyCard}
-      whileHover={hoverBounce}
-      onMouseMove={handleMouseMove}
+      variants={staggerItem}
+      whileHover={{ y: -2, transition: { type: 'spring', stiffness: 400, damping: 15 } }}
       className={cn(
-        'rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5 mouse-glow shadow-lg shadow-black/30',
+        'rounded-2xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5 transition-colors hover:border-white/[0.06]',
         className
       )}
     >
       <div className="flex items-center justify-between">
-        <span className="text-sm text-muted-foreground">{title}</span>
-        <Icon className="h-4 w-4 text-muted-foreground" />
+        <span className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider">{title}</span>
+        <div className="h-8 w-8 rounded-lg bg-emerald-500/8 flex items-center justify-center">
+          <Icon className="h-4 w-4 text-emerald-400" />
+        </div>
       </div>
-      <div className="mt-2 flex items-baseline gap-2">
-        <span className="text-2xl font-bold text-foreground">
+      <div className="mt-3 flex items-baseline gap-2">
+        <span className="text-2xl font-bold text-foreground font-display">
           {typeof value === 'number' ? (
             <AnimatedCounter value={value} />
           ) : (
@@ -42,7 +39,8 @@ export function StatCard({ title, value, icon: Icon, trend, className }: StatCar
           )}
         </span>
         {trend && (
-          <span className={cn('text-xs font-medium', trend.positive ? 'text-emerald-500' : 'text-rose-500')}>
+          <span className={cn('flex items-center gap-0.5 text-xs font-semibold', trend.positive ? 'text-emerald-400' : 'text-rose-400')}>
+            {trend.positive ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
             {trend.positive ? '+' : ''}{trend.value}%
           </span>
         )}

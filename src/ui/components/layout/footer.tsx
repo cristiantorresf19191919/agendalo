@@ -49,7 +49,7 @@ export function Footer() {
               <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/25">
                 <span className="text-sm font-bold text-white">A</span>
               </div>
-              <span className="text-xl font-bold text-gradient-primary">Agendalo</span>
+              <span className="text-xl font-bold text-gradient-primary font-display">Agendalo</span>
             </Link>
             <p className="text-sm text-zinc-500 max-w-xs">
               {t('footer.tagline')}

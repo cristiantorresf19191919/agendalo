@@ -12,7 +12,7 @@ export default async function DashboardLayout({ children, params }: DashboardLay
   const t = await getTranslations('dashboard');
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-[hsl(var(--surface-0))]">
       <Sidebar
         locale={locale}
         translations={{
@@ -42,7 +42,11 @@ export default async function DashboardLayout({ children, params }: DashboardLay
           community: t('community'),
         }}
       />
-      <main className="flex-1 overflow-auto p-4 lg:p-8 mesh-gradient">{children}</main>
+      <main className="flex-1 overflow-auto">
+        <div className="p-4 lg:p-8 max-w-[1400px]">
+          {children}
+        </div>
+      </main>
     </div>
   );
 }

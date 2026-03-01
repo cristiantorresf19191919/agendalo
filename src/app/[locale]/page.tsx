@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo, useCallback, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import {
   Zap,
@@ -25,6 +25,9 @@ import {
   Palette,
   Heart,
   Gem,
+  ChevronRight,
+  Play,
+  TrendingUp,
 } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { Button } from '@/ui/components/common/button';
@@ -47,6 +50,9 @@ export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [isLoading, setIsLoading] = useState(true);
   const [filterOpen, setFilterOpen] = useState(false);
+  const { scrollY } = useScroll();
+  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
+  const heroScale = useTransform(scrollY, [0, 400], [1, 0.97]);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 600);
@@ -73,28 +79,19 @@ export default function HomePage() {
       icon: Zap,
       title: t('home.featureInstant'),
       desc: t('home.featureInstantDesc'),
-      gradient: 'from-emerald-500/20 to-teal-500/20',
-      iconColor: 'text-emerald-400',
-      borderColor: 'border-emerald-500/20',
-      iconBg: 'bg-emerald-500/10',
+      accent: 'emerald',
     },
     {
       icon: Shield,
       title: t('home.featurePros'),
       desc: t('home.featureProsDesc'),
-      gradient: 'from-purple-500/20 to-violet-500/20',
-      iconColor: 'text-purple-400',
-      borderColor: 'border-purple-500/20',
-      iconBg: 'bg-purple-500/10',
+      accent: 'emerald',
     },
     {
       icon: BadgeDollarSign,
       title: t('home.featurePrices'),
       desc: t('home.featurePricesDesc'),
-      gradient: 'from-amber-500/20 to-orange-500/20',
-      iconColor: 'text-amber-400',
-      borderColor: 'border-amber-500/20',
-      iconBg: 'bg-amber-500/10',
+      accent: 'emerald',
     },
   ];
 
@@ -106,17 +103,17 @@ export default function HomePage() {
   ];
 
   const steps = [
-    { icon: Search, title: t('home.step1Title'), desc: t('home.step1Desc'), color: 'emerald' },
-    { icon: CalendarCheck, title: t('home.step2Title'), desc: t('home.step2Desc'), color: 'purple' },
-    { icon: HandMetal, title: t('home.step3Title'), desc: t('home.step3Desc'), color: 'amber' },
-    { icon: PartyPopper, title: t('home.step4Title'), desc: t('home.step4Desc'), color: 'pink' },
+    { icon: Search, title: t('home.step1Title'), desc: t('home.step1Desc'), num: '01' },
+    { icon: CalendarCheck, title: t('home.step2Title'), desc: t('home.step2Desc'), num: '02' },
+    { icon: HandMetal, title: t('home.step3Title'), desc: t('home.step3Desc'), num: '03' },
+    { icon: PartyPopper, title: t('home.step4Title'), desc: t('home.step4Desc'), num: '04' },
   ];
 
   const popularServices = [
-    { icon: Scissors, name: t('search.serviceHaircut'), price: '$25.000', color: 'emerald' },
-    { icon: Palette, name: t('search.serviceManicure'), price: '$35.000', color: 'pink' },
-    { icon: Heart, name: t('search.serviceMassage'), price: '$80.000', color: 'purple' },
-    { icon: Gem, name: t('search.serviceFacial'), price: '$120.000', color: 'amber' },
+    { icon: Scissors, name: t('search.serviceHaircut'), price: '$25.000', bookings: '1,200+' },
+    { icon: Palette, name: t('search.serviceManicure'), price: '$35.000', bookings: '890+' },
+    { icon: Heart, name: t('search.serviceMassage'), price: '$80.000', bookings: '650+' },
+    { icon: Gem, name: t('search.serviceFacial'), price: '$120.000', bookings: '430+' },
   ];
 
   const testimonials = [
@@ -143,64 +140,72 @@ export default function HomePage() {
     },
   ];
 
-  const stepColors: Record<string, { bg: string; text: string; border: string; glow: string }> = {
-    emerald: { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/20', glow: 'shadow-emerald-500/10' },
-    purple: { bg: 'bg-purple-500/10', text: 'text-purple-400', border: 'border-purple-500/20', glow: 'shadow-purple-500/10' },
-    amber: { bg: 'bg-amber-500/10', text: 'text-amber-400', border: 'border-amber-500/20', glow: 'shadow-amber-500/10' },
-    pink: { bg: 'bg-pink-500/10', text: 'text-pink-400', border: 'border-pink-500/20', glow: 'shadow-pink-500/10' },
-  };
-
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen overflow-hidden">
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden mesh-gradient">
+      <motion.section
+        style={{ opacity: heroOpacity, scale: heroScale }}
+        className="relative min-h-[92vh] flex flex-col items-center justify-center hero-gradient noise-overlay"
+      >
         <FloatingOrbs />
-        <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 pt-24 pb-16 text-center">
+
+        {/* Subtle grid */}
+        <div className="absolute inset-0 pointer-events-none grid-overlay" />
+
+        <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 pt-20 pb-16 text-center max-w-5xl mx-auto">
+          {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-4 py-1.5 text-sm text-emerald-400 mb-6"
+            className="inline-flex items-center gap-2.5 rounded-full bg-emerald-500/8 border border-emerald-500/15 px-5 py-2 text-sm text-emerald-400 mb-8 backdrop-blur-sm"
           >
-            <Sparkles className="h-4 w-4" />
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+            </span>
             {t('home.heroBadge')}
           </motion.div>
 
+          {/* Headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight max-w-4xl leading-[1.1]"
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="text-[clamp(2.5rem,6vw,5rem)] font-extrabold tracking-tight leading-[1.05] font-display"
           >
-            <span className="text-gradient-primary">{t('home.heroTitle')}</span>
+            <span className="text-gradient-hero">{t('home.heroTitle')}</span>
           </motion.h1>
 
+          {/* Subtitle */}
           <motion.p
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-base sm:text-lg text-zinc-400 max-w-lg mx-auto mt-5"
+            transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+            className="text-base sm:text-lg md:text-xl text-zinc-400 max-w-xl mx-auto mt-6 leading-relaxed"
           >
             {t('home.heroSubtitle')}
           </motion.p>
 
+          {/* Search */}
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="w-full max-w-xl mt-8"
+            transition={{ duration: 0.5, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
+            className="w-full max-w-xl mt-10"
           >
             <SearchBar onSearch={handleSearch} />
           </motion.div>
 
+          {/* Actions */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-wrap justify-center gap-3 mt-5"
+            transition={{ duration: 0.5, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-wrap justify-center gap-3 mt-6"
           >
             <Link href="/discover">
-              <Button variant="cta" size="lg" className="gap-2 shadow-lg shadow-emerald-500/20">
+              <Button variant="cta" size="lg" className="gap-2 rounded-xl shadow-lg shadow-emerald-500/20 px-8">
                 <Sparkles className="h-4 w-4" />
                 {t('discover.title')}
               </Button>
@@ -208,7 +213,7 @@ export default function HomePage() {
             <Button
               variant="outline"
               size="lg"
-              className="gap-2 border-zinc-700 hover:border-zinc-600 bg-zinc-900/50"
+              className="gap-2 rounded-xl border-zinc-700/60 hover:border-zinc-600 bg-zinc-900/30 backdrop-blur-sm"
               onClick={() => setFilterOpen(true)}
             >
               <SlidersHorizontal className="h-4 w-4 text-zinc-400" />
@@ -216,89 +221,119 @@ export default function HomePage() {
             </Button>
           </motion.div>
 
-          {/* Trust badge */}
+          {/* Social proof strip */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="mt-8 flex items-center gap-3 text-sm text-zinc-500"
+            className="mt-12 flex flex-col sm:flex-row items-center gap-4 sm:gap-8"
           >
-            <div className="flex -space-x-2">
-              {['M', 'C', 'A', 'L'].map((letter, i) => (
-                <div
-                  key={i}
-                  className="h-7 w-7 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 border-2 border-zinc-950 flex items-center justify-center text-[10px] font-bold text-white"
-                >
-                  {letter}
-                </div>
-              ))}
+            {/* Avatars */}
+            <div className="flex items-center gap-3">
+              <div className="flex -space-x-2.5">
+                {['M', 'C', 'A', 'L', 'S'].map((letter, i) => (
+                  <div
+                    key={i}
+                    className="h-8 w-8 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 border-2 border-zinc-950 flex items-center justify-center text-[10px] font-bold text-white"
+                    style={{ zIndex: 5 - i }}
+                  >
+                    {letter}
+                  </div>
+                ))}
+              </div>
+              <span className="text-sm text-zinc-500">{t('home.trustedBy')}</span>
             </div>
-            <span>{t('home.trustedBy')}</span>
+
+            {/* Rating badge */}
+            <div className="flex items-center gap-1.5 text-sm">
+              <div className="flex gap-0.5">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <Star key={i} className="h-3.5 w-3.5 text-amber-400 fill-amber-400" />
+                ))}
+              </div>
+              <span className="text-zinc-400 font-medium">4.9</span>
+              <span className="text-zinc-600">/</span>
+              <span className="text-zinc-500">5.0</span>
+            </div>
           </motion.div>
 
-          {/* Live activity ticker */}
+          {/* Live ticker */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7 }}
-            className="mt-6 w-full max-w-lg"
+            className="mt-8 w-full max-w-lg"
           >
             <LiveActivityTicker />
           </motion.div>
         </div>
-      </section>
+
+        {/* Bottom fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[hsl(var(--background))] to-transparent pointer-events-none z-20" />
+      </motion.section>
 
       {/* ── Popular Services ── */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-20">
         <ScrollReveal>
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-end justify-between mb-10">
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold">{t('home.popularServices')}</h2>
-              <p className="text-sm text-zinc-500 mt-1">{t('home.popularServicesDesc')}</p>
+              <p className="text-emerald-400 text-sm font-semibold tracking-wide uppercase mb-2">Trending</p>
+              <h2 className="text-2xl sm:text-3xl font-bold font-display">{t('home.popularServices')}</h2>
+              <p className="text-sm text-zinc-500 mt-2 max-w-md">{t('home.popularServicesDesc')}</p>
             </div>
+            <Link href="/discover" className="hidden sm:flex items-center gap-1 text-sm text-emerald-400 hover:text-emerald-300 transition-colors font-medium">
+              {t('business.seeAll')}
+              <ChevronRight className="h-4 w-4" />
+            </Link>
           </div>
         </ScrollReveal>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          {popularServices.map((service, i) => {
-            const colors = stepColors[service.color];
-            return (
-              <ScrollReveal key={i} delay={i * 0.08}>
-                <motion.div
-                  whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 15 } }}
-                  className={`relative rounded-2xl p-5 cursor-pointer overflow-hidden
-                    bg-zinc-900/60 backdrop-blur-sm border ${colors.border}
-                    hover:shadow-lg ${colors.glow} transition-all duration-300 group`}
-                >
-                  <div className={`inline-flex items-center justify-center rounded-xl ${colors.bg} p-3 mb-3`}>
-                    <service.icon className={`h-5 w-5 ${colors.text}`} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {popularServices.map((service, i) => (
+            <ScrollReveal key={i} delay={i * 0.08}>
+              <motion.div
+                whileHover={{ y: -6, transition: { type: 'spring', stiffness: 400, damping: 15 } }}
+                className="group relative rounded-2xl p-6 cursor-pointer overflow-hidden
+                  bg-[hsl(var(--surface-1))] border border-white/[0.04]
+                  hover:border-emerald-500/20 hover:shadow-xl hover:shadow-emerald-500/[0.06] transition-all duration-300"
+              >
+                <div className="flex items-start justify-between mb-5">
+                  <div className="inline-flex items-center justify-center rounded-xl bg-emerald-500/8 p-3.5">
+                    <service.icon className="h-5 w-5 text-emerald-400" />
                   </div>
-                  <h3 className="font-semibold text-sm text-foreground">{service.name}</h3>
-                  <p className={`text-sm font-medium ${colors.text} mt-1`}>{service.price}</p>
-                  <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <ArrowRight className="h-4 w-4 text-zinc-500" />
-                  </div>
-                </motion.div>
-              </ScrollReveal>
-            );
-          })}
+                  <ArrowRight className="h-4 w-4 text-zinc-700 group-hover:text-emerald-400 group-hover:translate-x-0.5 transition-all" />
+                </div>
+                <h3 className="font-semibold text-[15px] text-foreground font-display">{service.name}</h3>
+                <div className="flex items-center justify-between mt-3">
+                  <p className="text-lg font-bold text-emerald-400">{service.price}</p>
+                  <p className="text-[11px] text-zinc-600 font-medium">{service.bookings} bookings</p>
+                </div>
+              </motion.div>
+            </ScrollReveal>
+          ))}
         </div>
       </section>
 
       {/* ── Barrio Quick Select ── */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-12">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-16">
         <ScrollReveal>
-          <div className="text-center mb-8">
-            <h2 className="text-xl sm:text-2xl font-bold">{t('home.barrioSectionTitle')}</h2>
-            <p className="text-sm text-zinc-500 mt-1">{t('home.barrioSectionDesc')}</p>
+          <div className="text-center mb-10">
+            <p className="text-emerald-400 text-sm font-semibold tracking-wide uppercase mb-2">{t('home.barrioTrending')}</p>
+            <h2 className="text-2xl sm:text-3xl font-bold font-display">{t('home.barrioSectionTitle')}</h2>
+            <p className="text-sm text-zinc-500 mt-2">{t('home.barrioSectionDesc')}</p>
           </div>
         </ScrollReveal>
         <BarrioQuickSelect />
       </section>
 
       {/* ── Category filters + Business Grid ── */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-12">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-16">
         <ScrollReveal>
-          <h2 className="text-xl sm:text-2xl font-bold mb-6">{t('home.featuredBusinesses')}</h2>
+          <div className="flex items-end justify-between mb-8">
+            <div>
+              <p className="text-emerald-400 text-sm font-semibold tracking-wide uppercase mb-2">{t('search.inBogota')}</p>
+              <h2 className="text-2xl sm:text-3xl font-bold font-display">{t('home.featuredBusinesses')}</h2>
+            </div>
+          </div>
         </ScrollReveal>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -339,10 +374,10 @@ export default function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex flex-col items-center justify-center py-20 text-center"
               >
-                <div className="rounded-full bg-muted/30 p-4 mb-4">
-                  <SearchX className="h-8 w-8 text-muted-foreground" />
+                <div className="rounded-2xl bg-zinc-900/60 p-5 mb-4 border border-white/[0.04]">
+                  <SearchX className="h-8 w-8 text-zinc-600" />
                 </div>
-                <h3 className="text-lg font-semibold">{t('home.noResults')}</h3>
+                <h3 className="text-lg font-semibold font-display">{t('home.noResults')}</h3>
                 <p className="text-sm text-muted-foreground mt-1">{t('home.tryDifferent')}</p>
               </motion.div>
             )}
@@ -351,11 +386,11 @@ export default function HomePage() {
       </section>
 
       {/* ── Stats ── */}
-      <section className="relative overflow-hidden py-16">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-500/[0.03] to-transparent" />
+      <section className="relative overflow-hidden py-20">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-500/[0.02] to-transparent" />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative">
           <ScrollReveal>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               {stats.map((stat, i) => (
                 <motion.div
                   key={i}
@@ -363,13 +398,13 @@ export default function HomePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="text-center p-6 rounded-2xl bg-zinc-900/60 backdrop-blur-sm border border-zinc-800/60"
+                  className="relative text-center p-6 md:p-8 rounded-2xl bg-[hsl(var(--surface-1))] border border-white/[0.04] group hover:border-emerald-500/15 transition-colors duration-300"
                 >
-                  <div className="inline-flex items-center justify-center rounded-xl bg-emerald-500/10 p-2.5 mb-3">
+                  <div className="inline-flex items-center justify-center rounded-xl bg-emerald-500/8 p-3 mb-4">
                     <stat.icon className="h-5 w-5 text-emerald-400" />
                   </div>
-                  <p className="text-2xl sm:text-3xl font-bold text-gradient-primary">{stat.value}</p>
-                  <p className="text-xs sm:text-sm text-zinc-500 mt-1">{stat.label}</p>
+                  <p className="text-3xl sm:text-4xl font-extrabold text-gradient-primary font-display">{stat.value}</p>
+                  <p className="text-xs sm:text-sm text-zinc-500 mt-2 font-medium">{stat.label}</p>
                 </motion.div>
               ))}
             </div>
@@ -378,68 +413,75 @@ export default function HomePage() {
       </section>
 
       {/* ── How it works ── */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-20">
         <ScrollReveal>
-          <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold">{t('home.howItWorks')}</h2>
-            <p className="text-zinc-500 mt-2">{t('home.howItWorksDesc')}</p>
+          <div className="text-center mb-14">
+            <p className="text-emerald-400 text-sm font-semibold tracking-wide uppercase mb-2">Simple</p>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-display">{t('home.howItWorks')}</h2>
+            <p className="text-zinc-500 mt-3 max-w-md mx-auto">{t('home.howItWorksDesc')}</p>
           </div>
         </ScrollReveal>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {steps.map((step, i) => {
-            const colors = stepColors[step.color];
-            return (
-              <ScrollReveal key={i} delay={i * 0.1}>
-                <motion.div
-                  whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 15 } }}
-                  className={`relative rounded-2xl p-6 text-center overflow-hidden
-                    bg-zinc-900/60 backdrop-blur-sm border ${colors.border}
-                    hover:shadow-xl ${colors.glow} transition-all duration-300`}
-                >
-                  {/* Step number */}
-                  <div className="absolute top-4 right-4 text-5xl font-black text-white/[0.03]">
-                    {i + 1}
-                  </div>
-                  <div className="relative">
-                    <div className={`inline-flex items-center justify-center rounded-2xl ${colors.bg} p-4 shadow-lg ${colors.glow}`}>
-                      <step.icon className={`h-7 w-7 ${colors.text}`} />
+          {steps.map((step, i) => (
+            <ScrollReveal key={i} delay={i * 0.1}>
+              <motion.div
+                whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 15 } }}
+                className="relative rounded-2xl p-6 overflow-hidden
+                  bg-[hsl(var(--surface-1))] border border-white/[0.04]
+                  hover:border-emerald-500/15 transition-all duration-300 group"
+              >
+                {/* Step number watermark */}
+                <span className="absolute top-4 right-5 text-6xl font-black text-white/[0.02] font-display select-none">
+                  {step.num}
+                </span>
+
+                <div className="relative">
+                  {/* Step indicator */}
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className="inline-flex items-center justify-center rounded-xl bg-emerald-500/8 p-3">
+                      <step.icon className="h-5 w-5 text-emerald-400" />
                     </div>
-                    <div className={`inline-flex items-center justify-center h-6 w-6 rounded-full ${colors.bg} ${colors.text} text-xs font-bold mt-3 mb-1`}>
-                      {i + 1}
-                    </div>
-                    <h3 className="font-semibold text-lg">{step.title}</h3>
-                    <p className="text-sm text-zinc-500 mt-2">{step.desc}</p>
+                    <span className="text-xs font-bold text-emerald-400/60 tracking-widest uppercase">{step.num}</span>
                   </div>
-                </motion.div>
-              </ScrollReveal>
-            );
-          })}
+                  <h3 className="font-bold text-lg font-display">{step.title}</h3>
+                  <p className="text-sm text-zinc-500 mt-2 leading-relaxed">{step.desc}</p>
+                </div>
+
+                {/* Connector line on desktop */}
+                {i < steps.length - 1 && (
+                  <div className="hidden lg:block absolute top-1/2 -right-3 w-6 border-t border-dashed border-zinc-800" />
+                )}
+              </motion.div>
+            </ScrollReveal>
+          ))}
         </div>
       </section>
 
       {/* ── Why Agendalo ── */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-20">
         <ScrollReveal>
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-12">
-            {t('home.whyAgendalo')}
-          </h2>
+          <div className="text-center mb-14">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-display">
+              {t('home.whyAgendalo')}
+            </h2>
+          </div>
         </ScrollReveal>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {features.map((feat, i) => (
             <ScrollReveal key={i} delay={i * 0.1}>
               <motion.div
                 whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 15 } }}
-                className={`relative rounded-2xl p-6 text-center space-y-4 overflow-hidden
-                  bg-zinc-900/60 backdrop-blur-sm border ${feat.borderColor}
-                  hover:shadow-xl hover:shadow-emerald-500/[0.05] transition-all duration-300`}
+                className="relative rounded-2xl p-7 space-y-5 overflow-hidden
+                  bg-[hsl(var(--surface-1))] border border-white/[0.04]
+                  hover:border-emerald-500/15 transition-all duration-300 group"
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${feat.gradient} opacity-20`} />
-                <div className="relative">
-                  <div className={`inline-flex items-center justify-center rounded-2xl bg-gradient-to-br ${feat.gradient} p-4 shadow-lg`}>
-                    <feat.icon className={`h-7 w-7 ${feat.iconColor}`} />
-                  </div>
-                  <h3 className="font-semibold text-lg mt-4">{feat.title}</h3>
-                  <p className="text-sm text-zinc-500 mt-2">{feat.desc}</p>
+                <div className="inline-flex items-center justify-center rounded-2xl bg-emerald-500/8 p-4">
+                  <feat.icon className="h-6 w-6 text-emerald-400" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg font-display">{feat.title}</h3>
+                  <p className="text-sm text-zinc-500 mt-2 leading-relaxed">{feat.desc}</p>
                 </div>
               </motion.div>
             </ScrollReveal>
@@ -448,33 +490,36 @@ export default function HomePage() {
       </section>
 
       {/* ── Testimonials ── */}
-      <section className="relative overflow-hidden py-16">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/[0.02] to-transparent" />
+      <section className="relative overflow-hidden py-16 md:py-20">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-500/[0.015] to-transparent" />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative">
           <ScrollReveal>
-            <div className="text-center mb-12">
-              <h2 className="text-2xl sm:text-3xl font-bold">{t('home.testimonials')}</h2>
-              <p className="text-zinc-500 mt-2">{t('home.testimonialsDesc')}</p>
+            <div className="text-center mb-14">
+              <p className="text-emerald-400 text-sm font-semibold tracking-wide uppercase mb-2">{t('business.reviews')}</p>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-display">{t('home.testimonials')}</h2>
+              <p className="text-zinc-500 mt-3 max-w-md mx-auto">{t('home.testimonialsDesc')}</p>
             </div>
           </ScrollReveal>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((item, i) => (
               <ScrollReveal key={i} delay={i * 0.1}>
                 <motion.div
                   whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 15 } }}
-                  className="rounded-2xl p-6 bg-zinc-900/60 backdrop-blur-sm border border-zinc-800/60 hover:border-zinc-700 transition-all duration-300"
+                  className="rounded-2xl p-7 bg-[hsl(var(--surface-1))] border border-white/[0.04] hover:border-emerald-500/10 transition-all duration-300 flex flex-col"
                 >
-                  <Quote className="h-8 w-8 text-emerald-500/20 mb-4" />
-                  <p className="text-sm text-zinc-300 leading-relaxed mb-6">
-                    &ldquo;{item.text}&rdquo;
-                  </p>
-                  <div className="flex items-center gap-2 mb-3">
+                  {/* Stars */}
+                  <div className="flex items-center gap-1 mb-5">
                     {Array.from({ length: item.rating }).map((_, j) => (
-                      <Star key={j} className="h-3.5 w-3.5 text-amber-400 fill-amber-400" />
+                      <Star key={j} className="h-4 w-4 text-amber-400 fill-amber-400" />
                     ))}
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-sm font-bold text-white">
+
+                  <p className="text-[15px] text-zinc-300 leading-relaxed flex-1">
+                    &ldquo;{item.text}&rdquo;
+                  </p>
+
+                  <div className="flex items-center gap-3 mt-6 pt-5 border-t border-white/[0.04]">
+                    <div className="h-10 w-10 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-sm font-bold text-white">
                       {item.avatar}
                     </div>
                     <div>
@@ -490,31 +535,31 @@ export default function HomePage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 pb-20">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 pb-24">
         <ScrollReveal>
-          <motion.div
-            whileHover={{ scale: 1.003 }}
-            className="relative rounded-3xl overflow-hidden"
-          >
-            {/* Background gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-emerald-600/20 via-zinc-900 to-purple-600/20" />
-            <div className="absolute inset-0 border border-emerald-500/15 rounded-3xl" />
+          <div className="relative rounded-3xl overflow-hidden">
+            {/* Background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-600/15 via-[hsl(var(--surface-1))] to-[hsl(var(--surface-1))]" />
+            <div className="absolute inset-0 border border-emerald-500/10 rounded-3xl" />
+            {/* Decorative glow */}
+            <div className="absolute -top-24 -left-24 w-64 h-64 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -right-24 w-64 h-64 rounded-full bg-emerald-500/5 blur-3xl pointer-events-none" />
 
             <div className="relative p-8 sm:p-12 lg:p-16">
               <div className="max-w-2xl mx-auto text-center">
-                <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-4 py-1.5 text-sm text-emerald-400 mb-6">
+                <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/8 border border-emerald-500/15 px-4 py-1.5 text-sm text-emerald-400 mb-6">
                   <Sparkles className="h-4 w-4" />
                   {t('home.registerBusiness')}
                 </div>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-display mb-4">
                   {t('home.registerBusiness')}
                 </h2>
-                <p className="text-zinc-400 mb-8 text-base sm:text-lg">
+                <p className="text-zinc-400 mb-10 text-base sm:text-lg leading-relaxed">
                   {t('home.registerBusinessCta')}
                 </p>
 
                 {/* Benefits */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-8">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mb-10">
                   {[
                     t('home.registerBusinessBenefit1'),
                     t('home.registerBusinessBenefit2'),
@@ -528,14 +573,14 @@ export default function HomePage() {
                 </div>
 
                 <Link href="/auth/register">
-                  <Button variant="cta" size="lg" className="gap-2 shadow-lg shadow-emerald-500/20">
+                  <Button variant="cta" size="lg" className="gap-2 rounded-xl shadow-lg shadow-emerald-500/20 px-8">
                     {t('auth.registerAsBusiness')}
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>
               </div>
             </div>
-          </motion.div>
+          </div>
         </ScrollReveal>
       </section>
 
