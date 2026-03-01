@@ -38,7 +38,7 @@ export default function MarketingPage() {
   return (
     <PageTransition className="space-y-6 pt-14 lg:pt-0">
       <div className="flex items-center justify-between">
-        <div><h1 className="text-2xl font-bold">{t('title')}</h1><p className="text-sm text-muted-foreground mt-1">Campañas inteligentes por WhatsApp</p></div>
+        <div><h1 className="text-2xl font-bold font-display">{t('title')}</h1><p className="text-sm text-muted-foreground mt-1">Campañas inteligentes por WhatsApp</p></div>
         <Button variant="cta" className="gap-2"><Megaphone className="h-4 w-4" />{t('createCampaign')}</Button>
       </div>
 
@@ -50,7 +50,7 @@ export default function MarketingPage() {
       </motion.div>
 
       {/* Segments */}
-      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
         <h3 className="text-sm font-semibold mb-4">{t('audienceSegment')}</h3>
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
           {segments.map((seg, i) => (
@@ -63,7 +63,7 @@ export default function MarketingPage() {
       </motion.div>
 
       {/* Campaigns */}
-      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
         <h3 className="text-sm font-semibold mb-4">{t('campaigns')}</h3>
         <div className="space-y-4">
           {mockCampaigns.map((campaign) => (

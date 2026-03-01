@@ -35,7 +35,7 @@ export default function WhatsAppPage() {
     <PageTransition className="space-y-6 pt-14 lg:pt-0">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">{t('title')}</h1>
+          <h1 className="text-2xl font-bold font-display">{t('title')}</h1>
           <p className="text-sm text-muted-foreground mt-1">Gestiona tu comunicación por WhatsApp</p>
         </div>
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
@@ -53,7 +53,7 @@ export default function WhatsAppPage() {
 
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Config */}
-        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5 space-y-4">
+        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5 space-y-4">
           <h3 className="text-sm font-semibold">Configuración</h3>
           <div className="space-y-3">
             <div className="flex items-center justify-between p-3 rounded-lg bg-muted/20 border border-white/[0.03]">
@@ -74,7 +74,7 @@ export default function WhatsAppPage() {
         </motion.div>
 
         {/* Recent messages */}
-        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
           <h3 className="text-sm font-semibold mb-4">Mensajes recientes</h3>
           <div className="space-y-3">
             {recentMessages.map((msg, i) => (
@@ -95,7 +95,7 @@ export default function WhatsAppPage() {
       </div>
 
       {/* Shareable links */}
-      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-sm font-semibold">{t('shareableLinks')}</h3>
           <Button variant="outline" size="sm" className="text-xs gap-1"><Link2 className="h-3 w-3" />{t('createLink')}</Button>
@@ -118,7 +118,7 @@ export default function WhatsAppPage() {
       </motion.div>
 
       {/* Quick replies */}
-      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
         <h3 className="text-sm font-semibold mb-4">{t('quickReplies')}</h3>
         <div className="space-y-3">
           {quickReplies.map((qr) => (

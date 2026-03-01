@@ -89,7 +89,7 @@ export default function AssignServicesPage() {
       <div className="space-y-6">
         {/* Header */}
         <div>
-          <h1 className="text-2xl font-bold">{t('assignToProf')}</h1>
+          <h1 className="text-2xl font-bold font-display">{t('assignToProf')}</h1>
           <p className="text-sm text-muted-foreground mt-1">{t('assignDesc')}</p>
         </div>
 

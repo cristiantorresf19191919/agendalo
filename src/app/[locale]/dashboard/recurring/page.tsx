@@ -29,7 +29,7 @@ export default function RecurringPage() {
 
   return (
     <PageTransition className="space-y-6 pt-14 lg:pt-0">
-      <div><h1 className="text-2xl font-bold">{t('title')}</h1></div>
+      <div><h1 className="text-2xl font-bold font-display">{t('title')}</h1></div>
 
       <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard title="Citas recurrentes" value={mockRecurring.length} icon={Repeat} />
@@ -39,7 +39,7 @@ export default function RecurringPage() {
       </motion.div>
 
       {/* Recurring bookings */}
-      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
         <h3 className="text-sm font-semibold mb-4">Citas recurrentes activas</h3>
         <div className="space-y-3">
           {mockRecurring.map((r) => (
@@ -66,7 +66,7 @@ export default function RecurringPage() {
       </motion.div>
 
       {/* Bundles */}
-      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-sm font-semibold">{t('bundles')}</h3>
           <Button variant="outline" size="sm" className="text-xs gap-1">{t('createBundle')}</Button>

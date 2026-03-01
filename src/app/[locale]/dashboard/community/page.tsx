@@ -36,7 +36,7 @@ export default function CommunityPage() {
   return (
     <PageTransition className="space-y-6 pt-14 lg:pt-0">
       <div className="flex items-center justify-between">
-        <div><h1 className="text-2xl font-bold">{t('title')}</h1></div>
+        <div><h1 className="text-2xl font-bold font-display">{t('title')}</h1></div>
         <Button variant="cta" className="gap-2"><Plus className="h-4 w-4" />{t('createPost')}</Button>
       </div>
 
@@ -52,7 +52,7 @@ export default function CommunityPage() {
         {[{ key: 'feed', label: t('feed') }, { key: 'substitutes', label: t('substituteRequests') }].map(({ key, label }) => (
           <button key={key} onClick={() => setTab(key as 'feed' | 'substitutes')}
             className={cn('px-4 py-2 rounded-lg text-sm font-medium transition-colors',
-              tab === key ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'text-muted-foreground hover:bg-zinc-800 border border-transparent'
+              tab === key ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'text-muted-foreground hover:bg-[hsl(var(--surface-2))] border border-transparent'
             )}>
             {label}
           </button>
@@ -65,7 +65,7 @@ export default function CommunityPage() {
             const cat = categoryConfig[post.category];
             return (
               <motion.div key={post.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}
-                className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5 space-y-3"
+                className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5 space-y-3"
               >
                 <div className="flex items-center gap-3">
                   <div className="h-10 w-10 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-sm font-bold text-white">{post.avatar}</div>
@@ -81,7 +81,7 @@ export default function CommunityPage() {
                   <h3 className="font-semibold">{post.title}</h3>
                   <p className="text-sm text-zinc-400 mt-1">{post.content}</p>
                 </div>
-                <div className="flex items-center gap-6 text-sm text-muted-foreground pt-2 border-t border-zinc-800/50">
+                <div className="flex items-center gap-6 text-sm text-muted-foreground pt-2 border-t border-white/[0.03]">
                   <button className="flex items-center gap-1 hover:text-rose-400 transition-colors"><Heart className="h-4 w-4" />{post.likes}</button>
                   <button className="flex items-center gap-1 hover:text-blue-400 transition-colors"><MessageSquare className="h-4 w-4" />{post.comments}</button>
                   <button className="flex items-center gap-1 hover:text-amber-400 transition-colors"><Bookmark className="h-4 w-4" />{post.bookmarks}</button>

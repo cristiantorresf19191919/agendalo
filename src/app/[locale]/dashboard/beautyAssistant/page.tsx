@@ -38,7 +38,7 @@ export default function BeautyAssistantPage() {
     <PageTransition className="space-y-6 pt-14 lg:pt-0">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">{t('title')}</h1>
+          <h1 className="text-2xl font-bold font-display">{t('title')}</h1>
           <p className="text-sm text-muted-foreground mt-1">Recomendaciones inteligentes para tus clientes</p>
         </div>
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20">
@@ -56,7 +56,7 @@ export default function BeautyAssistantPage() {
 
       <div className="grid lg:grid-cols-2 gap-6">
         {/* AI Suggestions */}
-        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
           <div className="flex items-center gap-2 mb-4">
             <Sparkles className="h-4 w-4 text-purple-400" />
             <h3 className="text-sm font-semibold">{t('basedOnPreferences')}</h3>
@@ -79,7 +79,7 @@ export default function BeautyAssistantPage() {
         </motion.div>
 
         {/* Chat preview */}
-        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
           <h3 className="text-sm font-semibold mb-4">Vista previa de conversación IA</h3>
           <div className="space-y-3 max-h-[360px] overflow-y-auto">
             {chatPreview.map((msg, i) => (
@@ -97,7 +97,7 @@ export default function BeautyAssistantPage() {
       </div>
 
       {/* Trending */}
-      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
         <h3 className="text-sm font-semibold mb-4">{t('trendingStyles')}</h3>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {trendingStyles.map((style, i) => (

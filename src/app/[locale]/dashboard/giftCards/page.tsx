@@ -31,7 +31,7 @@ export default function GiftCardsPage() {
   return (
     <PageTransition className="space-y-6 pt-14 lg:pt-0">
       <div className="flex items-center justify-between">
-        <div><h1 className="text-2xl font-bold">{t('title')}</h1></div>
+        <div><h1 className="text-2xl font-bold font-display">{t('title')}</h1></div>
         <Button variant="cta" className="gap-2"><Plus className="h-4 w-4" />{t('create')}</Button>
       </div>
 
@@ -43,7 +43,7 @@ export default function GiftCardsPage() {
       </motion.div>
 
       {/* Preset amounts */}
-      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
         <h3 className="text-sm font-semibold mb-4">{t('presetAmounts')}</h3>
         <div className="grid grid-cols-3 lg:grid-cols-6 gap-3">
           {presetAmounts.map((amount, i) => (
@@ -58,7 +58,7 @@ export default function GiftCardsPage() {
       </motion.div>
 
       {/* Gift cards list */}
-      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
         <h3 className="text-sm font-semibold mb-4">Gift Cards emitidas</h3>
         <div className="space-y-3">
           {mockGiftCards.map((gc) => (
@@ -79,7 +79,7 @@ export default function GiftCardsPage() {
                 <p className="text-sm font-bold text-emerald-400">{formatCOP(gc.balance)}</p>
                 <p className="text-xs text-muted-foreground">de {formatCOP(gc.amount)}</p>
                 {gc.balance > 0 && gc.balance < gc.amount && (
-                  <div className="mt-1 h-1.5 w-20 rounded-full bg-zinc-800 overflow-hidden">
+                  <div className="mt-1 h-1.5 w-20 rounded-full bg-[hsl(var(--surface-2))] overflow-hidden">
                     <div className="h-full rounded-full bg-emerald-500" style={{ width: `${(gc.balance / gc.amount) * 100}%` }} />
                   </div>
                 )}

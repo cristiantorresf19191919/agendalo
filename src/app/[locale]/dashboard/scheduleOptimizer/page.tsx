@@ -41,7 +41,7 @@ export default function ScheduleOptimizerPage() {
   return (
     <PageTransition className="space-y-6 pt-14 lg:pt-0">
       <div className="flex items-center justify-between">
-        <div><h1 className="text-2xl font-bold">{t('title')}</h1><p className="text-sm text-muted-foreground mt-1">Optimiza tu agenda con inteligencia artificial</p></div>
+        <div><h1 className="text-2xl font-bold font-display">{t('title')}</h1><p className="text-sm text-muted-foreground mt-1">Optimiza tu agenda con inteligencia artificial</p></div>
         <Button variant="cta" className="gap-2"><Zap className="h-4 w-4" />{t('analyze')}</Button>
       </div>
 
@@ -53,7 +53,7 @@ export default function ScheduleOptimizerPage() {
       </motion.div>
 
       {/* Hourly utilization chart */}
-      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-sm font-semibold">Utilización por hora</h3>
           <div className="flex items-center gap-4 text-xs text-muted-foreground">
@@ -70,7 +70,7 @@ export default function ScheduleOptimizerPage() {
               <div className={cn('w-full rounded-t-md transition-colors', h.utilization >= 80 ? 'bg-emerald-500' : h.utilization >= 50 ? 'bg-emerald-500/60' : 'bg-zinc-700')}
                 style={{ height: '100%' }}
               />
-              <div className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 rounded bg-zinc-800 text-[10px] opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+              <div className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 rounded bg-[hsl(var(--surface-2))] text-[10px] opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
                 {h.utilization}% · {formatCOP(h.revenue)}
               </div>
               <p className="text-[10px] text-muted-foreground text-center mt-1">{h.hour}</p>
@@ -80,7 +80,7 @@ export default function ScheduleOptimizerPage() {
       </motion.div>
 
       {/* Recommendations */}
-      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
         <div className="flex items-center gap-2 mb-4">
           <Zap className="h-4 w-4 text-emerald-400" />
           <h3 className="text-sm font-semibold">{t('recommendations')}</h3>

@@ -21,7 +21,7 @@ export default function LocationsPage() {
   return (
     <PageTransition className="space-y-6 pt-14 lg:pt-0">
       <div className="flex items-center justify-between">
-        <div><h1 className="text-2xl font-bold">{t('title')}</h1></div>
+        <div><h1 className="text-2xl font-bold font-display">{t('title')}</h1></div>
         <Button variant="cta" className="gap-2"><Plus className="h-4 w-4" />{t('addLocation')}</Button>
       </div>
 
@@ -36,7 +36,7 @@ export default function LocationsPage() {
         {mockLocations.map((loc, i) => (
           <motion.div key={loc.id} variants={cardEntrance} initial="hidden" animate="visible" transition={{ delay: i * 0.1 }}
             whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 15 } }}
-            className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm overflow-hidden"
+            className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] overflow-hidden"
           >
             {/* Map placeholder */}
             <div className="h-32 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 flex items-center justify-center relative">

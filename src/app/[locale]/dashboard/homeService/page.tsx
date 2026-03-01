@@ -38,7 +38,7 @@ export default function HomeServicePage() {
 
   return (
     <PageTransition className="space-y-6 pt-14 lg:pt-0">
-      <div><h1 className="text-2xl font-bold">{t('title')}</h1><p className="text-sm text-muted-foreground mt-1">Gestiona servicios a domicilio</p></div>
+      <div><h1 className="text-2xl font-bold font-display">{t('title')}</h1><p className="text-sm text-muted-foreground mt-1">Gestiona servicios a domicilio</p></div>
 
       <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard title="Domicilios este mes" value={45} icon={Home} trend={{ value: 22, positive: true }} />
@@ -48,7 +48,7 @@ export default function HomeServicePage() {
       </motion.div>
 
       {/* Config */}
-      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
         <h3 className="text-sm font-semibold mb-4">Configuración de domicilio</h3>
         <div className="grid lg:grid-cols-4 gap-4">
           <div className="p-4 rounded-xl bg-muted/20 border border-white/[0.03] text-center">
@@ -76,11 +76,11 @@ export default function HomeServicePage() {
 
       <div className="grid lg:grid-cols-3 gap-6">
         {/* Zones */}
-        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
           <h3 className="text-sm font-semibold mb-4">{t('serviceZones')}</h3>
           <div className="space-y-2">
             {zones.map((z) => (
-              <div key={z.name} className={cn('flex items-center justify-between p-3 rounded-lg', z.active ? 'bg-muted/20' : 'bg-zinc-900/40 opacity-50')}>
+              <div key={z.name} className={cn('flex items-center justify-between p-3 rounded-lg', z.active ? 'bg-muted/20' : 'bg-[hsl(var(--surface-1))]/40 opacity-50')}>
                 <div className="flex items-center gap-2"><MapPin className="h-3.5 w-3.5 text-emerald-400" /><span className="text-sm">{z.name}</span></div>
                 <div className="flex items-center gap-2">
                   {z.active && <span className="text-xs text-muted-foreground">{z.bookings} reservas</span>}
@@ -94,7 +94,7 @@ export default function HomeServicePage() {
         </motion.div>
 
         {/* Active bookings */}
-        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="lg:col-span-2 rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="lg:col-span-2 rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
           <h3 className="text-sm font-semibold mb-4">Domicilios activos</h3>
           <div className="space-y-3">
             {mockHomeBookings.map((b) => {

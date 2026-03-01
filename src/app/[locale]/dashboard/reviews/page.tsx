@@ -4,19 +4,16 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import {
-  Star,
-  Camera,
-  MessageSquare,
-  ThumbsUp,
-  CheckCircle2,
-  TrendingUp,
-  Filter,
+  Star, Camera, MessageSquare, ThumbsUp, CheckCircle2,
+  TrendingUp, AlertCircle, Zap, BarChart3, ArrowUpRight,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { PageTransition } from '@/ui/components/layout/page-transition';
 import { StatCard } from '@/ui/components/dashboard/stat-card';
 import { Button } from '@/ui/components/common/button';
-import { staggerContainer, staggerItem, cardEntrance } from '@/ui/animations/variants';
+import { staggerContainer, staggerItem } from '@/ui/animations/variants';
+
+/* ─── Mock Data ─── */
 
 const mockReviews = [
   { id: '1', author: 'María García', avatar: 'M', rating: 5, text: 'Excelente servicio, Carlos es el mejor barbero. Siempre salgo contento con mi corte.', service: 'Corte clásico', professional: 'Carlos M.', date: '2026-02-25', photos: 2, helpful: 12, verified: true, responded: true, response: '¡Gracias María! Nos encanta que sigas confiando en nosotros.' },
@@ -34,6 +31,41 @@ const distribution = [
   { stars: 1, count: 4, pct: 2 },
 ];
 
+const sentimentKeywords = [
+  { word: 'Excelente', count: 42, positive: true },
+  { word: 'Profesional', count: 38, positive: true },
+  { word: 'Rápido', count: 25, positive: true },
+  { word: 'Espera larga', count: 8, positive: false },
+  { word: 'Precio', count: 6, positive: false },
+];
+
+/* ─── DashCard helper ─── */
+
+function DashCard({ children, className }: { children: React.ReactNode; className?: string }) {
+  return (
+    <motion.div
+      variants={staggerItem}
+      className={cn('rounded-xl p-5 bg-[hsl(var(--surface-1))] border border-white/[0.04]', className)}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function CardHeader({ icon: Icon, title, action }: { icon: React.ElementType; title: string; action?: React.ReactNode }) {
+  return (
+    <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center gap-2">
+        <Icon className="h-4 w-4 text-emerald-400" />
+        <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-400 font-display">{title}</h3>
+      </div>
+      {action}
+    </div>
+  );
+}
+
+/* ─── Main Page ─── */
+
 export default function ReviewsPage() {
   const t = useTranslations('reviewsPage');
   const [filter, setFilter] = useState<'all' | 'photo' | 'unresponded'>('all');
@@ -44,13 +76,26 @@ export default function ReviewsPage() {
     return true;
   });
 
+  const unrespondedCount = mockReviews.filter((r) => !r.responded).length;
+
   return (
     <PageTransition className="space-y-6 pt-14 lg:pt-0">
-      <div>
-        <h1 className="text-2xl font-bold">{t('title')}</h1>
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold font-display">{t('title')}</h1>
+          <p className="text-sm text-zinc-500 mt-1">215 reseñas totales · 4.7 promedio</p>
+        </div>
+        {unrespondedCount > 0 && (
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20">
+            <AlertCircle className="h-4 w-4 text-amber-400" />
+            <span className="text-xs text-amber-400 font-medium">{unrespondedCount} sin responder</span>
+          </div>
+        )}
       </div>
 
-      <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* KPI Row */}
+      <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         <StatCard title={t('averageRating')} value="4.7" icon={Star} trend={{ value: 3.2, positive: true }} />
         <StatCard title={t('totalReviews')} value={215} icon={MessageSquare} trend={{ value: 15, positive: true }} />
         <StatCard title={t('photoReviews')} value={48} icon={Camera} />
@@ -58,105 +103,137 @@ export default function ReviewsPage() {
       </motion.div>
 
       <div className="grid lg:grid-cols-3 gap-6">
-        {/* Distribution */}
-        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
-          <h3 className="text-sm font-semibold mb-4">{t('ratingDistribution')}</h3>
-          <div className="space-y-3">
-            {distribution.map((d) => (
-              <div key={d.stars} className="flex items-center gap-3">
-                <div className="flex items-center gap-1 w-12">
-                  <span className="text-sm font-medium">{d.stars}</span>
-                  <Star className="h-3.5 w-3.5 text-amber-400 fill-amber-400" />
+        {/* Distribution + Sentiment */}
+        <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-6">
+          {/* Rating Distribution */}
+          <DashCard>
+            <CardHeader icon={BarChart3} title={t('ratingDistribution')} />
+            <div className="space-y-3">
+              {distribution.map((d) => (
+                <div key={d.stars} className="flex items-center gap-3">
+                  <div className="flex items-center gap-1 w-12">
+                    <span className="text-sm font-medium font-display">{d.stars}</span>
+                    <Star className="h-3.5 w-3.5 text-amber-400 fill-amber-400" />
+                  </div>
+                  <div className="flex-1 h-2 rounded-full bg-white/[0.04] overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${d.pct}%` }}
+                      transition={{ duration: 0.8, delay: (5 - d.stars) * 0.1 }}
+                      className="h-full rounded-full bg-gradient-to-r from-amber-500 to-amber-400"
+                    />
+                  </div>
+                  <span className="text-xs text-zinc-500 w-10 text-right font-display">{d.count}</span>
                 </div>
-                <div className="flex-1 h-2 rounded-full bg-zinc-800 overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${d.pct}%` }}
-                    transition={{ duration: 0.8, delay: (5 - d.stars) * 0.1 }}
-                    className="h-full rounded-full bg-gradient-to-r from-amber-500 to-amber-400"
-                  />
-                </div>
-                <span className="text-xs text-muted-foreground w-10 text-right">{d.count}</span>
-              </div>
-            ))}
-          </div>
-          <div className="mt-6 text-center">
-            <p className="text-4xl font-bold text-gradient-primary">4.7</p>
-            <div className="flex items-center justify-center gap-1 mt-1">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className={cn('h-4 w-4', i < 4 ? 'text-amber-400 fill-amber-400' : 'text-amber-400/50 fill-amber-400/50')} />
               ))}
             </div>
-            <p className="text-xs text-muted-foreground mt-1">215 {t('totalReviews').toLowerCase()}</p>
-          </div>
+            <div className="mt-6 text-center">
+              <p className="text-4xl font-bold text-gradient-primary font-display">4.7</p>
+              <div className="flex items-center justify-center gap-1 mt-1">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className={cn('h-4 w-4', i < 4 ? 'text-amber-400 fill-amber-400' : 'text-amber-400/50 fill-amber-400/50')} />
+                ))}
+              </div>
+              <p className="text-xs text-zinc-500 mt-1">215 {t('totalReviews').toLowerCase()}</p>
+            </div>
+          </DashCard>
+
+          {/* Sentiment Keywords */}
+          <DashCard>
+            <CardHeader icon={Zap} title="Palabras clave" />
+            <div className="flex flex-wrap gap-2">
+              {sentimentKeywords.map((kw) => (
+                <div
+                  key={kw.word}
+                  className={cn(
+                    'px-3 py-1.5 rounded-lg text-xs font-medium border',
+                    kw.positive
+                      ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+                      : 'bg-rose-500/10 text-rose-400 border-rose-500/20'
+                  )}
+                >
+                  {kw.word} <span className="text-zinc-500 ml-1">({kw.count})</span>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 pt-3 border-t border-white/[0.04] flex items-center gap-2">
+              <TrendingUp className="h-3.5 w-3.5 text-emerald-400" />
+              <p className="text-xs text-zinc-500">
+                Sentimiento positivo: <span className="text-emerald-400 font-medium">89%</span>
+              </p>
+            </div>
+          </DashCard>
         </motion.div>
 
         {/* Reviews list */}
-        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="lg:col-span-2 rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-semibold">Reseñas recientes</h3>
-            <div className="flex gap-2">
-              {(['all', 'photo', 'unresponded'] as const).map((f) => (
-                <button
-                  key={f}
-                  onClick={() => setFilter(f)}
-                  className={cn(
-                    'px-3 py-1 rounded-lg text-xs font-medium transition-colors',
-                    filter === f ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'text-muted-foreground hover:bg-zinc-800 border border-transparent'
-                  )}
-                >
-                  {f === 'all' ? 'Todas' : f === 'photo' ? 'Con fotos' : 'Sin responder'}
-                </button>
-              ))}
+        <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="lg:col-span-2">
+          <DashCard>
+            <div className="flex items-center justify-between mb-4">
+              <CardHeader icon={MessageSquare} title="Reseñas recientes" />
+              <div className="flex gap-1">
+                {(['all', 'photo', 'unresponded'] as const).map((f) => (
+                  <button
+                    key={f}
+                    onClick={() => setFilter(f)}
+                    className={cn(
+                      'px-2.5 py-1 rounded-lg text-[10px] font-medium uppercase tracking-wider transition-colors',
+                      filter === f ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'text-zinc-500 hover:text-zinc-300 border border-transparent'
+                    )}
+                  >
+                    {f === 'all' ? 'Todas' : f === 'photo' ? 'Con fotos' : 'Sin responder'}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
-          <div className="space-y-4 max-h-[600px] overflow-y-auto pr-1">
-            {filtered.map((review) => (
-              <motion.div key={review.id} variants={staggerItem} className="p-4 rounded-xl bg-muted/20 border border-white/[0.03] space-y-3">
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-sm font-bold text-white">{review.avatar}</div>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <p className="text-sm font-semibold">{review.author}</p>
-                        {review.verified && <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />}
+            <div className="space-y-3 max-h-[700px] overflow-y-auto pr-1">
+              {filtered.map((review) => (
+                <motion.div key={review.id} variants={staggerItem} className="p-4 rounded-xl bg-[hsl(var(--surface-2))]/50 border border-white/[0.03] space-y-3">
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-sm font-bold text-white">{review.avatar}</div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <p className="text-sm font-semibold">{review.author}</p>
+                          {review.verified && <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />}
+                        </div>
+                        <p className="text-[10px] text-zinc-500">{review.service} · {review.professional} · {review.date}</p>
                       </div>
-                      <p className="text-xs text-muted-foreground">{review.service} · {review.professional} · {review.date}</p>
+                    </div>
+                    <div className="flex items-center gap-0.5">
+                      {Array.from({ length: review.rating }).map((_, i) => (
+                        <Star key={i} className="h-3.5 w-3.5 text-amber-400 fill-amber-400" />
+                      ))}
                     </div>
                   </div>
-                  <div className="flex items-center gap-1">
-                    {Array.from({ length: review.rating }).map((_, i) => (
-                      <Star key={i} className="h-3.5 w-3.5 text-amber-400 fill-amber-400" />
-                    ))}
-                  </div>
-                </div>
-                <p className="text-sm text-zinc-300 leading-relaxed">{review.text}</p>
-                {review.photos > 0 && (
-                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                    <Camera className="h-3 w-3" />
-                    {review.photos} fotos
-                  </div>
-                )}
-                {review.responded && (
-                  <div className="ml-4 pl-4 border-l-2 border-emerald-500/20">
-                    <p className="text-xs text-emerald-400 font-medium mb-1">Tu respuesta</p>
-                    <p className="text-sm text-zinc-400">{review.response}</p>
-                  </div>
-                )}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                    <ThumbsUp className="h-3 w-3" />
-                    {review.helpful} útil
-                  </div>
-                  {!review.responded && (
-                    <Button variant="ghost" size="sm" className="text-xs text-emerald-400">
-                      {t('respond')}
-                    </Button>
+                  <p className="text-sm text-zinc-300 leading-relaxed">{review.text}</p>
+                  {review.photos > 0 && (
+                    <div className="flex items-center gap-1 text-[10px] text-zinc-500">
+                      <Camera className="h-3 w-3" />
+                      {review.photos} fotos
+                    </div>
                   )}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                  {review.responded && (
+                    <div className="ml-4 pl-4 border-l-2 border-emerald-500/20">
+                      <p className="text-[10px] text-emerald-400 font-medium mb-1">Tu respuesta</p>
+                      <p className="text-sm text-zinc-400">{review.response}</p>
+                    </div>
+                  )}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1 text-[10px] text-zinc-500">
+                      <ThumbsUp className="h-3 w-3" />
+                      {review.helpful} útil
+                    </div>
+                    {!review.responded && (
+                      <Button variant="ghost" size="sm" className="text-xs text-emerald-400 gap-1">
+                        <ArrowUpRight className="h-3 w-3" />
+                        {t('respond')}
+                      </Button>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </DashCard>
         </motion.div>
       </div>
     </PageTransition>

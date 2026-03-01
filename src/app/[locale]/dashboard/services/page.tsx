@@ -65,7 +65,7 @@ export default function ServicesPage() {
       <div className="space-y-6 pt-14 lg:pt-0">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold">{t('title')}</h1>
+            <h1 className="text-2xl font-bold font-display">{t('title')}</h1>
             <p className="text-sm text-muted-foreground mt-1">
               {allServices.length} servicios en {categories.length} categorías
             </p>

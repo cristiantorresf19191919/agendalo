@@ -37,15 +37,15 @@ export default function NotificationsPage() {
 
   return (
     <PageTransition className="space-y-6 pt-14 lg:pt-0">
-      <div><h1 className="text-2xl font-bold">{t('title')}</h1></div>
+      <div><h1 className="text-2xl font-bold font-display">{t('title')}</h1></div>
 
       {/* Channels */}
-      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
         <h3 className="text-sm font-semibold mb-4">{t('channels')}</h3>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {channels.map((ch, i) => (
             <motion.div key={ch.name} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-              className={cn('rounded-xl p-4 text-center border', ch.enabled ? 'border-zinc-700 bg-muted/20' : 'border-zinc-800/50 bg-zinc-900/40 opacity-60')}
+              className={cn('rounded-xl p-4 text-center border', ch.enabled ? 'border-zinc-700 bg-muted/20' : 'border-white/[0.03] bg-[hsl(var(--surface-1))]/40 opacity-60')}
             >
               <ch.icon className={cn('h-8 w-8 mx-auto mb-2', ch.color)} />
               <p className="font-semibold text-sm">{ch.name}</p>
@@ -66,7 +66,7 @@ export default function NotificationsPage() {
 
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Reminder config */}
-        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
           <h3 className="text-sm font-semibold mb-4">{t('reminderSettings')}</h3>
           <div className="space-y-3">
             {reminders.map((r, i) => (
@@ -84,7 +84,7 @@ export default function NotificationsPage() {
         </motion.div>
 
         {/* Recent notifications */}
-        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
           <h3 className="text-sm font-semibold mb-4">Notificaciones enviadas</h3>
           <div className="space-y-3">
             {recentNotifs.map((n, i) => (

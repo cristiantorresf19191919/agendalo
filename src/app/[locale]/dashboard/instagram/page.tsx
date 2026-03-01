@@ -24,7 +24,7 @@ export default function InstagramPage() {
   return (
     <PageTransition className="space-y-6 pt-14 lg:pt-0">
       <div className="flex items-center justify-between">
-        <div><h1 className="text-2xl font-bold">{t('title')}</h1><p className="text-sm text-muted-foreground mt-1">{t('connectedAs', { username: 'barberia_urbana' })}</p></div>
+        <div><h1 className="text-2xl font-bold font-display">{t('title')}</h1><p className="text-sm text-muted-foreground mt-1">{t('connectedAs', { username: 'barberia_urbana' })}</p></div>
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20">
           <Instagram className="h-4 w-4 text-pink-400" />
           <span className="text-sm font-medium text-pink-400">Sincronizado</span>
@@ -39,7 +39,7 @@ export default function InstagramPage() {
       </motion.div>
 
       {/* Posts grid */}
-      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-sm font-semibold">Posts sincronizados</h3>
           <Button variant="outline" size="sm" className="text-xs gap-1"><Instagram className="h-3 w-3" />{t('autoSync')}</Button>
@@ -52,7 +52,7 @@ export default function InstagramPage() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: i * 0.05 }}
               whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 15 } }}
-              className="rounded-xl border border-zinc-800 bg-muted/20 overflow-hidden group"
+              className="rounded-xl border border-white/[0.04] bg-muted/20 overflow-hidden group"
             >
               {/* Image placeholder */}
               <div className="aspect-square bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center text-5xl relative">
@@ -70,7 +70,7 @@ export default function InstagramPage() {
                   <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400">{post.service}</span>
                   <span className="text-[10px] text-muted-foreground">{post.professional}</span>
                 </div>
-                <div className="flex items-center justify-between text-xs border-t border-zinc-800 pt-2">
+                <div className="flex items-center justify-between text-xs border-t border-white/[0.04] pt-2">
                   <div className="flex items-center gap-1 text-muted-foreground"><Eye className="h-3 w-3" />{post.bookClicks} clics</div>
                   <div className="flex items-center gap-1 text-emerald-400 font-medium"><CalendarCheck className="h-3 w-3" />{post.conversions} reservas</div>
                 </div>

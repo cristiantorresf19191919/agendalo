@@ -298,7 +298,7 @@ export default function DashboardOverviewPage() {
                     )}
                     style={{ height: '100%' }}
                   />
-                  <div className="absolute -top-6 left-1/2 -translate-x-1/2 px-1.5 py-0.5 rounded bg-zinc-800 text-[9px] opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 font-medium">
+                  <div className="absolute -top-6 left-1/2 -translate-x-1/2 px-1.5 py-0.5 rounded bg-[hsl(var(--surface-2))] text-[9px] opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 font-medium">
                     {val}%
                   </div>
                 </motion.div>

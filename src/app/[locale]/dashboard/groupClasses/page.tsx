@@ -31,7 +31,7 @@ export default function GroupClassesPage() {
   return (
     <PageTransition className="space-y-6 pt-14 lg:pt-0">
       <div className="flex items-center justify-between">
-        <div><h1 className="text-2xl font-bold">{t('title')}</h1></div>
+        <div><h1 className="text-2xl font-bold font-display">{t('title')}</h1></div>
         <Button variant="cta" className="gap-2"><Plus className="h-4 w-4" />{t('createEvent')}</Button>
       </div>
 
@@ -49,7 +49,7 @@ export default function GroupClassesPage() {
           return (
             <motion.div key={event.id} variants={cardEntrance} initial="hidden" animate="visible" transition={{ delay: i * 0.1 }}
               whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 15 } }}
-              className={cn('rounded-xl border bg-zinc-900/80 backdrop-blur-sm p-5 space-y-4', colors.border)}
+              className={cn('rounded-xl border bg-[hsl(var(--surface-1))] p-5 space-y-4', colors.border)}
             >
               <div className="flex items-start justify-between">
                 <div>
@@ -74,7 +74,7 @@ export default function GroupClassesPage() {
                   <span>{t('confirmed')}: <strong>{event.confirmed}/{event.capacity}</strong></span>
                   {event.waitlisted > 0 && <span className="text-amber-400 text-xs">{event.waitlisted} en espera</span>}
                 </div>
-                <div className="h-2 rounded-full bg-zinc-800 overflow-hidden">
+                <div className="h-2 rounded-full bg-[hsl(var(--surface-2))] overflow-hidden">
                   <motion.div initial={{ width: 0 }} animate={{ width: `${pct}%` }} transition={{ duration: 0.8 }}
                     className={cn('h-full rounded-full', pct === 100 ? 'bg-gradient-to-r from-rose-500 to-pink-400' : 'bg-gradient-to-r from-emerald-500 to-teal-400')}
                   />
@@ -83,11 +83,11 @@ export default function GroupClassesPage() {
 
               <div className="flex -space-x-2">
                 {Array.from({ length: Math.min(event.confirmed, 6) }).map((_, j) => (
-                  <div key={j} className="h-8 w-8 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 border-2 border-zinc-900 flex items-center justify-center text-[10px] font-bold text-white">
+                  <div key={j} className="h-8 w-8 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 border-2 border-[hsl(var(--surface-0))] flex items-center justify-center text-[10px] font-bold text-white">
                     {String.fromCharCode(65 + j)}
                   </div>
                 ))}
-                {event.confirmed > 6 && <div className="h-8 w-8 rounded-full bg-zinc-800 border-2 border-zinc-900 flex items-center justify-center text-[10px] font-bold text-zinc-400">+{event.confirmed - 6}</div>}
+                {event.confirmed > 6 && <div className="h-8 w-8 rounded-full bg-[hsl(var(--surface-2))] border-2 border-[hsl(var(--surface-0))] flex items-center justify-center text-[10px] font-bold text-zinc-400">+{event.confirmed - 6}</div>}
               </div>
             </motion.div>
           );

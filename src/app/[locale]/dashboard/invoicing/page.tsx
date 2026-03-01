@@ -28,7 +28,7 @@ export default function InvoicingPage() {
 
   return (
     <PageTransition className="space-y-6 pt-14 lg:pt-0">
-      <div><h1 className="text-2xl font-bold">{t('title')}</h1><p className="text-sm text-muted-foreground mt-1">Cumplimiento DIAN — Facturación electrónica</p></div>
+      <div><h1 className="text-2xl font-bold font-display">{t('title')}</h1><p className="text-sm text-muted-foreground mt-1">Cumplimiento DIAN — Facturación electrónica</p></div>
 
       <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard title="Facturas emitidas" value={45} icon={FileText} />
@@ -38,7 +38,7 @@ export default function InvoicingPage() {
       </motion.div>
 
       {/* DIAN config */}
-      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
         <h3 className="text-sm font-semibold mb-4">Configuración DIAN</h3>
         <div className="grid lg:grid-cols-4 gap-4">
           <div className="p-4 rounded-xl bg-muted/20 border border-white/[0.03]">
@@ -65,12 +65,12 @@ export default function InvoicingPage() {
       </motion.div>
 
       {/* Invoices */}
-      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
         <h3 className="text-sm font-semibold mb-4">Facturas recientes</h3>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-xs text-muted-foreground border-b border-zinc-800">
+              <tr className="text-left text-xs text-muted-foreground border-b border-white/[0.04]">
                 <th className="pb-2 pr-4">N°</th>
                 <th className="pb-2 pr-4">Cliente</th>
                 <th className="pb-2 pr-4">{t('subtotal')}</th>
@@ -84,7 +84,7 @@ export default function InvoicingPage() {
               {mockInvoices.map((inv) => {
                 const sc = statusConfig[inv.status as keyof typeof statusConfig];
                 return (
-                  <tr key={inv.id} className="border-b border-zinc-800/50 last:border-0">
+                  <tr key={inv.id} className="border-b border-white/[0.03] last:border-0">
                     <td className="py-3 pr-4 font-mono text-xs">{inv.number}</td>
                     <td className="py-3 pr-4"><div><p className="font-medium">{inv.customer}</p><p className="text-xs text-muted-foreground">NIT: {inv.nit}</p></div></td>
                     <td className="py-3 pr-4">{formatCOP(inv.amount)}</td>

@@ -41,7 +41,7 @@ export default function LoyaltyPage() {
   return (
     <PageTransition className="space-y-6 pt-14 lg:pt-0">
       <div>
-        <h1 className="text-2xl font-bold">{t('title')}</h1>
+        <h1 className="text-2xl font-bold font-display">{t('title')}</h1>
         <p className="text-sm text-muted-foreground mt-1">Gestiona tu programa de puntos y niveles</p>
       </div>
 
@@ -53,7 +53,7 @@ export default function LoyaltyPage() {
       </motion.div>
 
       {/* Tiers */}
-      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
         <h3 className="text-sm font-semibold mb-4">{t('tiers')}</h3>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {tiers.map((tier, i) => (
@@ -79,11 +79,11 @@ export default function LoyaltyPage() {
 
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Top members */}
-        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
           <h3 className="text-sm font-semibold mb-4">Top miembros</h3>
           <div className="space-y-3">
             {topMembers.map((member, i) => (
-              <motion.div key={member.name} variants={staggerItem} className="flex items-center justify-between py-2 border-b border-zinc-800/50 last:border-0">
+              <motion.div key={member.name} variants={staggerItem} className="flex items-center justify-between py-2 border-b border-white/[0.03] last:border-0">
                 <div className="flex items-center gap-3">
                   <span className="text-xs font-bold text-muted-foreground w-5">#{i + 1}</span>
                   <div className="h-8 w-8 rounded-full bg-emerald-500/10 flex items-center justify-center text-xs font-bold text-emerald-400">
@@ -104,11 +104,11 @@ export default function LoyaltyPage() {
         </motion.div>
 
         {/* Recent activity */}
-        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+        <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
           <h3 className="text-sm font-semibold mb-4">Actividad reciente</h3>
           <div className="space-y-3">
             {recentActivity.map((activity, i) => (
-              <motion.div key={i} variants={staggerItem} className="flex items-center justify-between py-2 border-b border-zinc-800/50 last:border-0">
+              <motion.div key={i} variants={staggerItem} className="flex items-center justify-between py-2 border-b border-white/[0.03] last:border-0">
                 <div className="flex items-center gap-3">
                   <div className={cn('h-8 w-8 rounded-full flex items-center justify-center',
                     activity.type === 'earned' ? 'bg-emerald-500/10' : activity.type === 'redeemed' ? 'bg-purple-500/10' : 'bg-amber-500/10'

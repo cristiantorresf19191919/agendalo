@@ -27,7 +27,7 @@ export default function BarrioDiscoveryPage() {
 
   return (
     <PageTransition className="space-y-6 pt-14 lg:pt-0">
-      <div><h1 className="text-2xl font-bold">{t('title')}</h1><p className="text-sm text-muted-foreground mt-1">Cómo te descubren tus vecinos</p></div>
+      <div><h1 className="text-2xl font-bold font-display">{t('title')}</h1><p className="text-sm text-muted-foreground mt-1">Cómo te descubren tus vecinos</p></div>
 
       <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard title="Vistas desde barrios" value="3,750" icon={Eye} trend={{ value: 18, positive: true }} />
@@ -37,7 +37,7 @@ export default function BarrioDiscoveryPage() {
       </motion.div>
 
       {/* Barrio performance */}
-      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
         <h3 className="text-sm font-semibold mb-4">Rendimiento por barrio</h3>
         <div className="space-y-4">
           {mockBarrios.map((b, i) => (
@@ -69,7 +69,7 @@ export default function BarrioDiscoveryPage() {
       </motion.div>
 
       {/* Social proof signals */}
-      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-5">
+      <motion.div variants={cardEntrance} initial="hidden" animate="visible" className="rounded-xl border border-white/[0.04] bg-[hsl(var(--surface-1))] p-5">
         <h3 className="text-sm font-semibold mb-4">Señales de prueba social activas</h3>
         <div className="grid lg:grid-cols-2 gap-3">
           {socialProof.map((sp, i) => (
