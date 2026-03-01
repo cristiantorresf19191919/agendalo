@@ -3,26 +3,29 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ═══════════════════════════════════════════════
+   DESIGN TOKENS — Light mode
+   ═══════════════════════════════════════════════ */
 :root {
-  --background: 0 0% 99%;
-  --foreground: 220 14% 10%;
+  --background: 0 0% 98.5%;
+  --foreground: 222 14% 12%;
   --card: 0 0% 100%;
-  --card-foreground: 220 14% 10%;
+  --card-foreground: 222 14% 12%;
   --primary: 160 84% 39%;
   --primary-foreground: 0 0% 100%;
-  --muted: 220 14% 96%;
-  --muted-foreground: 220 8% 46%;
-  --border: 220 13% 90%;
+  --muted: 220 14% 95%;
+  --muted-foreground: 220 8% 50%;
+  --border: 220 13% 91%;
   --ring: 160 84% 39%;
   --available: 160 84% 39%;
   --blocked: 0 84.2% 60.2%;
   --radius: 0.75rem;
 
   /* Surface elevation (light) */
-  --surface-0: 0 0% 98%;
-  --surface-1: 220 14% 96%;
-  --surface-2: 220 13% 93%;
-  --surface-3: 220 12% 90%;
+  --surface-0: 0 0% 98.5%;
+  --surface-1: 220 20% 97%;
+  --surface-2: 220 14% 94%;
+  --surface-3: 220 12% 91%;
 
   /* Accent colors */
   --accent-purple: 271 75% 50%;
@@ -30,48 +33,76 @@
   --accent-teal: 162 63% 46%;
 
   /* Glassmorphism tokens */
-  --glass-bg: 0 0% 100% / 0.7;
-  --glass-border: 0 0% 0% / 0.08;
-  --glass-blur: 16px;
+  --glass-bg: 0 0% 100% / 0.72;
+  --glass-border: 220 14% 12% / 0.06;
+  --glass-blur: 20px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 2px 8px -2px rgba(0, 0, 0, 0.06), 0 4px 12px -4px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 4px 16px -4px rgba(0, 0, 0, 0.08), 0 8px 24px -8px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 8px 32px -8px rgba(0, 0, 0, 0.10), 0 16px 48px -16px rgba(0, 0, 0, 0.06);
+  --shadow-emerald: 0 4px 16px -4px rgba(16, 185, 129, 0.15);
 }
 
+/* ═══════════════════════════════════════════════
+   DESIGN TOKENS — Dark mode
+   ═══════════════════════════════════════════════ */
 .dark {
-  --background: 220 14% 4%;
-  --foreground: 0 0% 96%;
-  --card: 220 13% 8%;
-  --card-foreground: 0 0% 96%;
+  --background: 222 16% 4.5%;
+  --foreground: 0 0% 95%;
+  --card: 222 14% 7.5%;
+  --card-foreground: 0 0% 95%;
   --primary: 160 84% 39%;
   --primary-foreground: 0 0% 0%;
-  --muted: 220 10% 14%;
-  --muted-foreground: 220 8% 56%;
-  --border: 220 10% 18%;
+  --muted: 222 12% 13%;
+  --muted-foreground: 222 8% 52%;
+  --border: 222 12% 16%;
   --ring: 160 84% 39%;
   --available: 160 84% 39%;
   --blocked: 0 84.2% 60.2%;
 
   /* Surface elevation */
-  --surface-0: 220 14% 4%;
-  --surface-1: 220 13% 8%;
-  --surface-2: 220 12% 11%;
-  --surface-3: 220 10% 14%;
+  --surface-0: 222 16% 4.5%;
+  --surface-1: 222 14% 7.5%;
+  --surface-2: 222 12% 10.5%;
+  --surface-3: 222 10% 13.5%;
 
   /* Glassmorphism tokens (dark) */
-  --glass-bg: 220 13% 8% / 0.7;
-  --glass-border: 0 0% 100% / 0.08;
-  --glass-blur: 16px;
+  --glass-bg: 222 14% 7.5% / 0.72;
+  --glass-border: 0 0% 100% / 0.06;
+  --glass-blur: 20px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 2px 8px -2px rgba(0, 0, 0, 0.3), 0 4px 12px -4px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 4px 16px -4px rgba(0, 0, 0, 0.4), 0 8px 24px -8px rgba(0, 0, 0, 0.25);
+  --shadow-xl: 0 8px 32px -8px rgba(0, 0, 0, 0.5), 0 16px 48px -16px rgba(0, 0, 0, 0.3);
+  --shadow-emerald: 0 4px 16px -4px rgba(16, 185, 129, 0.2);
 }
 
+
+/* ═══════════════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════════════ */
 body {
   font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   padding: env(safe-area-inset-top) env(safe-area-inset-right)
            env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 h1, h2, h3, h4, h5, h6, .font-display {
   font-family: 'Outfit', system-ui, sans-serif;
+  letter-spacing: -0.02em;
 }
 
-/* ─── Scrollbar ─── */
+
+/* ═══════════════════════════════════════════════
+   SCROLLBAR
+   ═══════════════════════════════════════════════ */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -87,7 +118,10 @@ h1, h2, h3, h4, h5, h6, .font-display {
   background: hsl(var(--muted-foreground));
 }
 
-/* ─── Glassmorphism utility ─── */
+
+/* ═══════════════════════════════════════════════
+   GLASSMORPHISM
+   ═══════════════════════════════════════════════ */
 .glass {
   background: hsl(var(--glass-bg));
   backdrop-filter: blur(var(--glass-blur));
@@ -95,76 +129,94 @@ h1, h2, h3, h4, h5, h6, .font-display {
   border: 1px solid hsl(var(--glass-border));
 }
 
-/* ─── Mesh gradient background ─── */
+
+/* ═══════════════════════════════════════════════
+   BACKGROUNDS
+   ═══════════════════════════════════════════════ */
 .mesh-gradient {
   position: relative;
   background:
-    radial-gradient(ellipse 80% 50% at 20% 40%, hsla(160, 84%, 39%, 0.08), transparent 60%),
-    radial-gradient(ellipse 60% 60% at 80% 20%, hsla(271, 75%, 50%, 0.05), transparent 55%),
-    radial-gradient(ellipse 50% 70% at 50% 80%, hsla(330, 70%, 60%, 0.03), transparent 50%),
+    radial-gradient(ellipse 80% 50% at 20% 40%, hsla(160, 84%, 39%, 0.06), transparent 60%),
+    radial-gradient(ellipse 60% 60% at 80% 20%, hsla(271, 75%, 50%, 0.04), transparent 55%),
+    radial-gradient(ellipse 50% 70% at 50% 80%, hsla(330, 70%, 60%, 0.02), transparent 50%),
     hsl(var(--background));
 }
 
-/* ─── Hero-specific gradient ─── */
 .hero-gradient {
   position: relative;
   background:
-    radial-gradient(ellipse 120% 80% at 50% 100%, hsla(160, 84%, 39%, 0.15), transparent 50%),
-    radial-gradient(ellipse 80% 50% at 10% 30%, hsla(160, 84%, 39%, 0.08), transparent 50%),
-    radial-gradient(ellipse 60% 40% at 90% 20%, hsla(271, 75%, 50%, 0.06), transparent 50%),
+    radial-gradient(ellipse 100% 70% at 50% 100%, hsla(160, 84%, 39%, 0.10), transparent 50%),
+    radial-gradient(ellipse 70% 50% at 15% 40%, hsla(160, 84%, 39%, 0.06), transparent 50%),
+    radial-gradient(ellipse 50% 35% at 85% 25%, hsla(271, 75%, 50%, 0.04), transparent 50%),
     hsl(var(--background));
 }
 
-/* ─── Noise texture overlay ─── */
+.dark .hero-gradient {
+  background:
+    radial-gradient(ellipse 100% 70% at 50% 100%, hsla(160, 84%, 39%, 0.12), transparent 50%),
+    radial-gradient(ellipse 70% 50% at 15% 40%, hsla(160, 84%, 39%, 0.07), transparent 50%),
+    radial-gradient(ellipse 50% 35% at 85% 25%, hsla(271, 75%, 50%, 0.05), transparent 50%),
+    hsl(var(--background));
+}
+
+
+/* ═══════════════════════════════════════════════
+   NOISE & GRID OVERLAYS
+   ═══════════════════════════════════════════════ */
 .noise-overlay::after {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.025;
+  opacity: 0.02;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   z-index: 1;
 }
 
-/* ─── Grid overlay ─── */
 .grid-overlay {
   position: absolute;
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(hsl(var(--border) / 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, hsl(var(--border) / 0.04) 1px, transparent 1px);
-  background-size: 60px 60px;
-  mask-image: radial-gradient(ellipse 70% 50% at 50% 40%, black 20%, transparent 70%);
+    linear-gradient(hsl(var(--border) / 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--border) / 0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 60% 40% at 50% 40%, black 10%, transparent 70%);
 }
 
-/* ─── Gradient text ─── */
+
+/* ═══════════════════════════════════════════════
+   GRADIENT TEXT
+   ═══════════════════════════════════════════════ */
 .text-gradient-primary {
-  background: linear-gradient(135deg, hsl(160, 84%, 55%) 0%, hsl(162, 72%, 48%) 50%, hsl(170, 70%, 45%) 100%);
+  background: linear-gradient(135deg, hsl(160, 84%, 44%) 0%, hsl(162, 72%, 38%) 50%, hsl(170, 70%, 36%) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-hero {
-  background: linear-gradient(135deg, hsl(220, 14%, 15%) 0%, hsl(160, 84%, 35%) 40%, hsl(162, 72%, 30%) 60%, hsl(220, 14%, 20%) 100%);
+  background: linear-gradient(140deg, hsl(222, 14%, 15%) 0%, hsl(160, 84%, 32%) 50%, hsl(222, 14%, 18%) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: gradientShift 6s ease-in-out infinite;
+  animation: gradientShift 8s ease-in-out infinite;
 }
 
 .dark .text-gradient-hero {
-  background: linear-gradient(135deg, hsl(0, 0%, 98%) 0%, hsl(160, 84%, 55%) 40%, hsl(162, 72%, 48%) 60%, hsl(0, 0%, 90%) 100%);
+  background: linear-gradient(140deg, hsl(0, 0%, 97%) 0%, hsl(160, 84%, 50%) 50%, hsl(0, 0%, 88%) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* ─── Mouse-following glow (requires --mouse-x / --mouse-y set via JS) ─── */
+
+/* ═══════════════════════════════════════════════
+   MOUSE GLOW
+   ═══════════════════════════════════════════════ */
 .mouse-glow {
   position: relative;
   overflow: hidden;
@@ -175,23 +227,26 @@ h1, h2, h3, h4, h5, h6, .font-display {
   inset: 0;
   border-radius: inherit;
   background: radial-gradient(
-    350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    hsla(160, 84%, 39%, 0.07),
+    300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    hsla(160, 84%, 39%, 0.06),
     transparent 60%
   );
   pointer-events: none;
   z-index: 1;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s ease;
 }
 .mouse-glow:hover::before {
   opacity: 1;
 }
 
-/* ─── CTA shine sweep ─── */
+
+/* ═══════════════════════════════════════════════
+   CTA SHINE
+   ═══════════════════════════════════════════════ */
 @keyframes shine {
   0% { transform: translateX(-100%); }
-  100% { transform: translateX(250%); }
+  100% { transform: translateX(300%); }
 }
 
 .cta-shine {
@@ -203,51 +258,60 @@ h1, h2, h3, h4, h5, h6, .font-display {
   position: absolute;
   top: 0;
   left: 0;
-  width: 40%;
+  width: 30%;
   height: 100%;
   background: linear-gradient(
     90deg,
     transparent,
-    hsla(0, 0%, 100%, 0.15),
+    hsla(0, 0%, 100%, 0.12),
     transparent
   );
   pointer-events: none;
-  animation: shine 3s ease-in-out infinite;
+  animation: shine 4s ease-in-out infinite;
 }
 
-/* ─── Floating orb keyframe ─── */
+
+/* ═══════════════════════════════════════════════
+   KEYFRAMES
+   ═══════════════════════════════════════════════ */
 @keyframes float {
   0%, 100% { transform: translateY(0) translateX(0) scale(1); }
-  25% { transform: translateY(-20px) translateX(10px) scale(1.02); }
-  50% { transform: translateY(-10px) translateX(-10px) scale(0.98); }
-  75% { transform: translateY(-25px) translateX(5px) scale(1.01); }
+  25% { transform: translateY(-18px) translateX(8px) scale(1.01); }
+  50% { transform: translateY(-8px) translateX(-8px) scale(0.99); }
+  75% { transform: translateY(-22px) translateX(4px) scale(1.005); }
 }
 
-/* ─── Gradient text animation ─── */
 @keyframes gradientShift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
 }
 
-/* ─── Accessibility: Focus visible ─── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ═══════════════════════════════════════════════
+   UTILITIES
+   ═══════════════════════════════════════════════ */
+
+/* Focus ring */
 *:focus-visible {
   outline: 2px solid hsl(var(--ring));
   outline-offset: 2px;
 }
 
-/* ─── Subtle card surface (glass, no border) ─── */
+/* Card surface (elevated glass) */
 .card-surface {
   background: hsl(var(--glass-bg));
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
-  border: 1px solid hsl(0 0% 100% / 0.12);
-  box-shadow:
-    0 0 0 1px hsl(var(--glass-border)),
-    0 8px 32px -8px rgba(0, 0, 0, 0.5),
-    0 4px 16px -4px rgba(0, 0, 0, 0.3);
+  border: 1px solid hsl(var(--glass-border));
+  box-shadow: var(--shadow-lg);
 }
 
-/* ─── Gradient border (pseudo-element) ─── */
+/* Gradient border (pseudo-element) */
 .gradient-border {
   position: relative;
 }
@@ -259,9 +323,9 @@ h1, h2, h3, h4, h5, h6, .font-display {
   padding: 1px;
   background: linear-gradient(
     135deg,
-    hsla(160, 84%, 39%, 0.2),
+    hsla(160, 84%, 39%, 0.15),
     transparent 50%,
-    hsla(271, 75%, 50%, 0.1)
+    hsla(271, 75%, 50%, 0.08)
   );
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
@@ -269,7 +333,7 @@ h1, h2, h3, h4, h5, h6, .font-display {
   pointer-events: none;
 }
 
-/* ─── Section divider (gradient line) ─── */
+/* Section divider */
 .section-divider {
   height: 1px;
   background: linear-gradient(
@@ -280,7 +344,15 @@ h1, h2, h3, h4, h5, h6, .font-display {
   );
 }
 
-/* ─── Accessibility: Reduced motion ─── */
+/* Smooth section transitions */
+.section-fade {
+  animation: fadeIn 0.5s ease-out;
+}
+
+
+/* ═══════════════════════════════════════════════
+   REDUCED MOTION
+   ═══════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

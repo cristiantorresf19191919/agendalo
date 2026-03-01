@@ -41,15 +41,15 @@ export function BusinessCard({ business, className }: BusinessCardProps) {
     <motion.div
       ref={ref}
       variants={cardEntrance}
-      whileHover={hoverBounce}
+      whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
       whileTap={tapScale}
       onMouseMove={handleMouseMove}
       className={cn(
         'group rounded-2xl overflow-hidden cursor-pointer mouse-glow',
-        'bg-card backdrop-blur-xl',
-        'shadow-lg shadow-black/5 dark:shadow-black/30',
-        'border border-border',
-        'hover:shadow-xl hover:shadow-emerald-500/[0.1] hover:border-emerald-500/20',
+        'bg-card',
+        'shadow-[var(--shadow-sm)]',
+        'border border-border/60',
+        'hover:shadow-[var(--shadow-lg)] hover:border-emerald-500/20',
         'transition-all duration-300',
         className
       )}
@@ -62,26 +62,24 @@ export function BusinessCard({ business, className }: BusinessCardProps) {
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
           <div className="absolute top-3 right-3">
-            <span className="inline-flex items-center rounded-full bg-black/40 backdrop-blur-md px-3 py-1 text-xs font-medium text-white/90 border border-white/10">
+            <span className="inline-flex items-center rounded-full bg-black/35 backdrop-blur-md px-2.5 py-1 text-[11px] font-medium text-white/90 border border-white/10">
               {categoryLabels[business.category ?? ''] ?? business.category}
             </span>
           </div>
           <div className="absolute bottom-3 left-4 right-4">
-            <h3 className="text-lg font-bold text-white drop-shadow-lg">{business.name}</h3>
+            <h3 className="text-base font-bold text-white drop-shadow-lg font-display tracking-tight">{business.name}</h3>
           </div>
         </div>
-        <div className="p-4 space-y-2">
+        <div className="p-4 space-y-2.5">
           <p className="text-sm text-muted-foreground line-clamp-1">{business.description}</p>
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <StarRating rating={business.rating} reviewCount={business.reviewCount} />
-            </div>
+            <StarRating rating={business.rating} reviewCount={business.reviewCount} />
             <PriceRange level={priceLevel} />
           </div>
-          <p className="text-xs text-muted-foreground flex items-center gap-1">
-            <MapPin className="h-3 w-3 text-emerald-400" />
+          <p className="text-xs text-muted-foreground/80 flex items-center gap-1">
+            <MapPin className="h-3 w-3 text-emerald-500" />
             {business.address}
           </p>
         </div>

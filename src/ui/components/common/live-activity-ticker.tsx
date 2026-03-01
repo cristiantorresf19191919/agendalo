@@ -56,23 +56,23 @@ export function LiveActivityTicker() {
   }, [generateActivity]);
 
   return (
-    <div className="relative overflow-hidden h-8">
+    <div className="relative overflow-hidden h-7">
       <AnimatePresence mode="wait">
         <motion.div
           key={current}
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -16 }}
-          transition={{ duration: 0.3, ease: 'easeOut' }}
-          className="flex items-center gap-2 text-sm text-muted-foreground absolute inset-0 justify-center"
+          exit={{ opacity: 0, y: -14 }}
+          transition={{ duration: 0.25, ease: 'easeOut' }}
+          className="flex items-center gap-2 text-[13px] text-muted-foreground absolute inset-0 justify-center"
         >
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60" />
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
           </span>
           <span>{activity.text}</span>
-          <span className="flex items-center gap-0.5 text-muted-foreground/60">
-            <MapPin className="h-3 w-3" />
+          <span className="flex items-center gap-0.5 text-muted-foreground/50">
+            <MapPin className="h-2.5 w-2.5" />
             {activity.timeAgo}
           </span>
         </motion.div>

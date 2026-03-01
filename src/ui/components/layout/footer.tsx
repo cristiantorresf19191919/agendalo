@@ -2,7 +2,7 @@
 
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
-import { Heart } from 'lucide-react';
+import { Heart, CalendarDays } from 'lucide-react';
 
 function InstagramIcon({ className }: { className?: string }) {
   return (
@@ -40,28 +40,27 @@ export function Footer() {
   ];
 
   return (
-    <footer className="border-t border-border bg-muted/50">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <footer className="border-t border-border/40 bg-[hsl(var(--surface-1))]">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 py-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="space-y-4 sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/25">
-                <span className="text-sm font-bold text-white">A</span>
+            <Link href="/" className="flex items-center gap-2.5">
+              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-[var(--shadow-emerald)]">
+                <CalendarDays className="h-4 w-4 text-white" />
               </div>
-              <span className="text-xl font-bold text-gradient-primary font-display">Agendalo</span>
+              <span className="text-lg font-bold text-gradient-primary font-display tracking-tight">Agendalo</span>
             </Link>
-            <p className="text-sm text-muted-foreground max-w-xs">
+            <p className="text-sm text-muted-foreground max-w-xs leading-relaxed">
               {t('footer.tagline')}
             </p>
-            {/* Social links */}
-            <div className="flex items-center gap-3 pt-1">
+            <div className="flex items-center gap-2 pt-1">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="flex items-center justify-center h-9 w-9 rounded-xl bg-muted border border-border text-muted-foreground hover:text-emerald-400 hover:border-emerald-500/30 hover:bg-emerald-500/5 transition-all duration-200"
+                  className="flex items-center justify-center h-9 w-9 rounded-lg bg-muted/50 text-muted-foreground hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-500/8 transition-all duration-200"
                 >
                   <social.icon className="h-4 w-4" />
                 </a>
@@ -70,54 +69,54 @@ export function Footer() {
           </div>
 
           {/* Explore */}
-          <div className="space-y-3">
-            <h4 className="text-sm font-semibold text-foreground">{t('footer.explore')}</h4>
+          <div className="space-y-4">
+            <h4 className="text-sm font-semibold text-foreground font-display">{t('footer.explore')}</h4>
             <nav className="flex flex-col gap-2.5">
-              <Link href="/" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
+              <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 {t('search.barbershop')}
               </Link>
-              <Link href="/" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
+              <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 {t('search.spa')}
               </Link>
-              <Link href="/" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
+              <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 {t('search.beautySalon')}
               </Link>
-              <Link href="/" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
+              <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 {t('search.nailSalon')}
               </Link>
-              <Link href="/" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
+              <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 {t('search.aestheticClinic')}
               </Link>
             </nav>
           </div>
 
           {/* Company */}
-          <div className="space-y-3">
-            <h4 className="text-sm font-semibold text-foreground">{t('footer.company')}</h4>
+          <div className="space-y-4">
+            <h4 className="text-sm font-semibold text-foreground font-display">{t('footer.company')}</h4>
             <nav className="flex flex-col gap-2.5">
-              <Link href="/about" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
+              <Link href="/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 {t('footer.aboutUs')}
               </Link>
-              <Link href="/for-businesses" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
+              <Link href="/for-businesses" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 {t('header.forBusinesses')}
               </Link>
-              <Link href="/pricing" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
+              <Link href="/pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 {t('header.pricing')}
               </Link>
-              <Link href="/faq" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
+              <Link href="/faq" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 {t('footer.contact')}
               </Link>
             </nav>
           </div>
 
           {/* Legal */}
-          <div className="space-y-3">
-            <h4 className="text-sm font-semibold text-foreground">{t('footer.legal')}</h4>
+          <div className="space-y-4">
+            <h4 className="text-sm font-semibold text-foreground font-display">{t('footer.legal')}</h4>
             <nav className="flex flex-col gap-2.5">
-              <Link href="/terms" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
+              <Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 {t('footer.terms')}
               </Link>
-              <Link href="/privacy" className="text-sm text-muted-foreground hover:text-emerald-500 transition-colors">
+              <Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 {t('footer.privacy')}
               </Link>
             </nav>
@@ -125,7 +124,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="h-px bg-border/60 mt-10 mb-6" />
+        <div className="h-px bg-border/40 mt-12 mb-6" />
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground">
           <p>&copy; 2026 Agendalo. {t('footer.rights')}</p>
           <p className="flex items-center gap-1">

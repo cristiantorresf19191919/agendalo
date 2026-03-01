@@ -8,18 +8,18 @@ import { cn } from '@/lib/utils';
 import { tapScale } from '@/ui/animations/variants';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
-        default: 'bg-emerald-500 text-black font-bold shadow-md shadow-emerald-500/25 hover:bg-emerald-400 hover:shadow-emerald-500/40',
+        default: 'bg-emerald-500 text-white font-semibold shadow-[var(--shadow-sm)] hover:bg-emerald-600 hover:shadow-[var(--shadow-md)] active:bg-emerald-700',
         destructive: 'bg-rose-500 text-white shadow-sm hover:bg-rose-600',
-        outline: 'border border-border bg-card text-foreground hover:bg-muted hover:border-border',
+        outline: 'border border-border bg-card text-foreground hover:bg-muted/60',
         secondary: 'bg-muted text-foreground hover:bg-muted/80',
-        ghost: 'text-muted-foreground hover:bg-muted hover:text-foreground',
-        link: 'text-emerald-500 underline-offset-4 hover:underline',
-        available: 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 hover:bg-emerald-500/20',
-        cta: 'bg-gradient-to-r from-emerald-500 to-teal-400 text-black font-bold shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:brightness-110 cta-shine',
+        ghost: 'text-muted-foreground hover:bg-muted/50 hover:text-foreground',
+        link: 'text-emerald-600 dark:text-emerald-400 underline-offset-4 hover:underline',
+        available: 'bg-emerald-500/8 text-emerald-600 dark:text-emerald-400 border border-emerald-500/15 hover:bg-emerald-500/15',
+        cta: 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] hover:brightness-105 cta-shine',
       },
       size: {
         default: 'h-10 px-4 py-2',

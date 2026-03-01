@@ -14,14 +14,14 @@ export function Skeleton({ className }: SkeletonProps) {
       variants={skeletonPulse}
       initial="initial"
       animate="animate"
-      className={cn('rounded-lg bg-muted/50', className)}
+      className={cn('rounded-lg bg-muted/60', className)}
     />
   );
 }
 
 export function BusinessCardSkeleton() {
   return (
-    <div className="rounded-2xl overflow-hidden bg-card border border-border shadow-lg shadow-black/5 dark:shadow-black/30">
+    <div className="rounded-2xl overflow-hidden bg-card border border-border/50 shadow-[var(--shadow-sm)]">
       <Skeleton className="h-48 w-full rounded-none" />
       <div className="p-5 space-y-3">
         <Skeleton className="h-5 w-3/4" />

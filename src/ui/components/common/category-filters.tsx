@@ -25,7 +25,7 @@ export function CategoryFilters({ selected, onSelect, className }: CategoryFilte
   const t = useTranslations();
 
   return (
-    <div className={cn('flex gap-2 overflow-x-auto pb-2 scrollbar-none', className)}>
+    <div className={cn('flex gap-1.5 overflow-x-auto pb-2 scrollbar-none', className)}>
       {CATEGORIES.map((cat) => {
         const Icon = iconMap[cat.icon] ?? LayoutGrid;
         const isActive = selected === cat.id;
@@ -35,16 +35,16 @@ export function CategoryFilters({ selected, onSelect, className }: CategoryFilte
             key={cat.id}
             onClick={() => onSelect(cat.id)}
             className={cn(
-              'relative shrink-0 flex items-center gap-2 rounded-full px-5 py-2.5 min-h-[40px] text-sm font-medium transition-all duration-200',
+              'relative shrink-0 flex items-center gap-2 rounded-full px-4 py-2 min-h-[36px] text-sm font-medium transition-all duration-200',
               isActive
-                ? 'text-emerald-400'
-                : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
+                ? 'text-emerald-600 dark:text-emerald-400'
+                : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
             )}
           >
             {isActive && (
               <motion.div
                 layoutId="category-active"
-                className="absolute inset-0 rounded-full bg-emerald-500/10 border border-emerald-500/20"
+                className="absolute inset-0 rounded-full bg-emerald-500/8 border border-emerald-500/15"
                 transition={{ type: 'spring', stiffness: 400, damping: 30 }}
               />
             )}

@@ -31,8 +31,8 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         whileTap={interactive ? tapScale : undefined}
         onMouseMove={glow ? handleMouseMove : onMouseMove}
         className={cn(
-          'rounded-xl border border-border bg-card p-6 text-card-foreground shadow-sm',
-          glass && 'bg-card/80 backdrop-blur-xl border-border shadow-xl shadow-black/10 dark:shadow-black/40',
+          'rounded-xl border border-border/60 bg-card p-6 text-card-foreground shadow-[var(--shadow-sm)]',
+          glass && 'bg-card/80 backdrop-blur-xl border-border/40 shadow-[var(--shadow-lg)]',
           glow && 'mouse-glow',
           interactive && 'cursor-pointer',
           className
